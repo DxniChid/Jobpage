@@ -64,6 +64,7 @@ defineEmits(["toggle-favorite"])
   border-radius: 24px;
   padding: 22px 26px;
   margin-bottom: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   display: flex;
   justify-content: space-between;

@@ -42,6 +42,10 @@ const jobs = ref([
   job.favorite = !job.favorite
 }
 
+function logOut(){
+  alert("Du wurdest ausgeloggt!");
+}
+
 
 </script>
 
@@ -49,6 +53,10 @@ const jobs = ref([
   <header>
     <h3>Meine Favoriten</h3>
     <h1>Jobpage</h1>
+    <div class="profile">
+      <span>A.B.</span>
+      <button @click="logout">Ausloggen</button>
+    </div>
   </header>
   <div class="search-wrap">
     <input
@@ -64,7 +72,8 @@ const jobs = ref([
   />
 
 <footer>
-  test test
+  <h4>079 90 00 00</h4>
+  <h4>test@gmail.com</h4>
 </footer>
 </template>
 
@@ -75,13 +84,25 @@ header {
   height: 100px;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
   
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
 }
 
 h3 {
   font-size: 15px;
   text-align: left;
+  position: absolute;
+  left: 20px;
+  bottom: 10px;
 }
 
 footer {
@@ -89,6 +110,9 @@ footer {
   width: 100%;
   height: 80px;
   margin-top: 80px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  color: white;
 }
 .jobs-wrapper {
   padding: 20px;
@@ -157,5 +181,28 @@ footer {
   padding: 0 18px;
   font-size: 18px;
   cursor: pointer;
+}
+
+.profile {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile span {
+  font-size: 14px;
+}
+
+.profile button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
 }
 </style>
