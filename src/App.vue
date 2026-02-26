@@ -1,7 +1,13 @@
+
+
+
+
 <script setup>
+import Header from './components/header.vue'
+
 import Job_Ad from './components/Job_Ad.vue';
 import { ref } from "vue";
-
+import '../src/routes/index';
 
 const jobs = ref([
 {
@@ -51,6 +57,7 @@ function logOut(){
 
 <template>
   <header>
+  <Header title="Job Page" icon="src/images/pfp.webp" link="test"></Header>
     <h3>Meine Favoriten</h3>
     <h1>Jobpage</h1>
     <div class="profile">
