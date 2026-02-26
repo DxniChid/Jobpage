@@ -3,11 +3,11 @@
     export default{
         props: {
             date: {
-                type: date,
+                type: String,
                 required: true
             },
             time: {
-                type: time,
+                type: String,
                 required: true
             }
         }
