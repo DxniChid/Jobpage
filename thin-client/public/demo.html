@@ -12,7 +12,7 @@
 		<h1>Unsere offenen Stellen</h1>
 	</header>
 
-	<!-- 1. Placeholder with configurations -->
+	<!-- Placeholder with configuration -->
 	<div id="job-client"
 			data-api-url="https://api.jobs.bfo.ch"
 			data-category="IT"
@@ -26,8 +26,15 @@
 			data-use-mock="true">
 	</div>
 
-	<!-- 2. Embedding the Thin-Client -->
+	<style>
+		/* Css of the widget can be overridden */
+		.job-link {
+			background-color: rgb(35, 148, 166);
+		}
+	</style>
+
+	<!-- Entrypoint of the Thin Client code -->
 	<script type="module" src="../src/index.js"></script>
-	<!-- Hint: In the productive enviroment, the company's own file is going to be embedded  -->
+	<!-- Note: In the production, the bundled file is used -->
 </body>
 </html>

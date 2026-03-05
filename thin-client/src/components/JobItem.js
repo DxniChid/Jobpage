@@ -73,7 +73,7 @@ export function createJobItem(job) {
 		</div>
 		<div class="job-company">${escapeHTML(job.company || '')}</div>
 		<div class="job-location">
-			<i class="icon-pin"></i> ${escapeHTML(job.zip || '')} ${escapeHTML(job.location || '')} (${escapeHTML(job.region || '')})
+			<i class="icon-pin"></i> ${escapeHTML(job.zip || '')} ${escapeHTML(job.location || '')} ${job.region && job.region.length > 0 ? '(' + escapeHTML(job.region) + ')' : ''}
 		</div>
 
 		<div class="job-details">
