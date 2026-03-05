@@ -16,7 +16,7 @@ import './assets/style.css'
 
 <template>
   <header>
-  <Header title="Job Page" icon="src/images/pfp.webp" link="test"></Header>
+  <Header title="Job Page" icon="src/images/pfp.webp"></Header>
     <h3>Meine Favoriten</h3>
     <h1>Jobpage</h1>
     <div class="profile">
@@ -31,9 +31,8 @@ import './assets/style.css'
 </footer>
 
 </template>
-
 <style scoped>
-
-
-
+h1 {
+  margin-bottom: 20px;
+}
 </style>
