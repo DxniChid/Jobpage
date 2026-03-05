@@ -1,5 +1,5 @@
 <template>
-
+    <div @click="$router.push('/jobdescription')"><img src="@/images/back.png" id="back"></div>
   <div class="center-container">
     <div class="form-container">
       <h1>Bewerbungsformular</h1>
@@ -189,4 +189,10 @@ textarea {
     display: block; 
     margin: 0 auto;  
 }
+    #back{
+        height: 50px;
+        width: auto;
+        cursor: pointer;
+    }
+  
 </style>
