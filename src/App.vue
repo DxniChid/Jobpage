@@ -1,6 +1,5 @@
 <script>
 import '../src/routes/index'
-import Header from './components/header.vue'
 
 export default{
 

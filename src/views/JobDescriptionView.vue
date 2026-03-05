@@ -32,13 +32,16 @@ import Date from '@/components/date.vue'
         display: flex;
         flex-direction: column;
     }
-    #address{
-        padding-right: 3%;
-        padding-top: 1px;
-    }
-    #date {
-        margin-top: 25px;
-    }
+   #address {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between;  <-- REMOVE THIS */
+    justify-content: flex-start;      /* <-- ADD THIS */
+    gap: 20px;                        /* Add a specific gap instead */
+    padding-right: 3%;
+    padding-top: 1px;   
+}
+  
 </style>
 
 
