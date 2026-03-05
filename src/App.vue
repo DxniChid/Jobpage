@@ -3,9 +3,6 @@ import '../src/routes/index'
 
 export default{
 
-  components: {
-    Header
-  }
 
 }
 
