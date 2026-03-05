@@ -21,16 +21,18 @@ Add the provided JavaScript shortly before the closing `</body>` tag.
 ## 3. Configuration (optional)
 Use **data attributes** to control the widget behaviour:
 
-| Attribute              | Description                                                                 | Example                        |
-|------------------------|-----------------------------------------------------------------------------|--------------------------------|
-| `data-api-url`         | Base URL of the job API (default: `https://api.jobs.bfo.ch`)                | `https://my-api.ch`            |
-| `data-category`        | Pre‑selected category                                                       | `IT`                           |
-| `data-region`          | Pre‑selected region                                                         | `VS`                           |
-| `data-language`        | Default language (passed to the API)                                        | `CH-de`                        |
-| `data-filter-options`  | JSON array with additional filters (`HomeOffice`, `Language`, `Workplace`)  | `["HomeOffice","Language"]`    |
-| `data-style-entry`     | URL to a custom CSS stylesheet                                              | `/css/jobs.css`                |
-| `data-style-search-bar`| Inline CSS for the filter bar (e.g. button colour)                          | `button { background: green; }`|
-| `data-use-mock`        | Force mock data for testing (`true` / `false`)                              | `true`                         |
+| Attribute                      | Description                                                                | Example                        |
+|--------------------------------|----------------------------------------------------------------------------|--------------------------------|
+| `data-api-url`                 | Base URL of the job API (default: `https://api.jobs.bfo.ch`)               | `https://my-api.ch`            |
+| `data-category`                | Pre‑selected category                                                      | `IT`                           |
+| `data-region`                  | Pre‑selected region                                                        | `VS`                           |
+| `data-language`                | Default language (passed to the API)                                       | `CH-de`                        |
+| `data-filter-options`          | JSON array with additional filters (`HomeOffice`, `Language`, `Workplace`) | `["HomeOffice","Language"]`    |
+| `data-style-entry`             | URL to a custom CSS stylesheet                                             | `/css/jobs.css`                |
+| `data-show-search-bar`         | Show the filter bar (`true` / `false`)                                     | `false`                        |
+| `data-search-background-color` | Background color of the filter bar                                         | `#f0f6ff`                      |
+| `data-search-placeholder-color`| Placeholder text color of the filter bar                                   | `#4e6f91`                      |
+| `data-use-mock`                | Force mock data for testing (`true` / `false`)                             | `true`                         |
 
 **Example with all options:**
 ```html

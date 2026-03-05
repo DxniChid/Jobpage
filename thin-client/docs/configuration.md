@@ -44,4 +44,4 @@ Inline CSS written directly into a `<style>` block. Handy for quick adjustments,
 ## `data-use-mock`
 **Type:** `boolean` (`"true"` / `"false"`)
 **Default:** `undefined`
-If set to `true`, the widget **only uses the built‑in mock data** and never tries to call the real API. Ideal for testing and development.
+If set to `true`, the widget **only uses the built‑in mock data** and never tries to call the real API. Only useful for testing and development.

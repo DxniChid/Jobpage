@@ -5,7 +5,7 @@ The response **must** be an array of objects that may contain the following fiel
 
 | Field         | Type    | Description                                                  | Example                     |
 |---------------|---------|--------------------------------------------------------------|-----------------------------|
-| `id`          | string  | Unique job identifier                                        | `"job-123"`                 |
+| `id`          | string  | Unique job identifier                                        | `"426"`                 |
 | `title`       | string  | Job title                                                    | `"Software Developer"`      |
 | `company`     | string  | Company name                                                 | `"BFO AG"`                  |
 | `location`    | string  | City of work                                                 | `"Bern"`                    |
