@@ -1,5 +1,6 @@
 <script setup>
 
+import '@/assets/style.css'
 import JobDescription from '../components/description.vue'
 import Address from '../components/address.vue'
 import Date from '@/components/date.vue'
