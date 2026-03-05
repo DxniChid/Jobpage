@@ -1,7 +1,7 @@
 <script setup>
 import Job_Ad from './components/Job_Ad.vue';
 import { ref } from "vue";
-
+import './assets/style.css'
 
 const jobs = ref([
 {
@@ -78,42 +78,7 @@ function logOut(){
 </template>
 
 <style scoped>
-header {
-  background-color: #6b5a8e;
-  width: 100%;
-  height: 100px;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  
-}
 
-h1 {
-  text-align: center;
-  margin: 0;
-}
-
-h3 {
-  font-size: 15px;
-  text-align: left;
-  position: absolute;
-  left: 20px;
-  bottom: 10px;
-}
-
-footer {
-  background-color: #6b5a8e;
-  width: 100%;
-  height: 80px;
-  margin-top: 80px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  color: white;
-}
 .jobs-wrapper {
   padding: 20px;
   max-width: 700px;
@@ -183,30 +148,5 @@ footer {
   cursor: pointer;
 }
 
-.profile {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-.profile span {
-  font-size: 14px;
-}
-
-.profile button {
-  background-color: #ff4d4d;
-  border: none;
-  color: white;
-  padding: 5px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-footer {
-  text-align: center;
-}
 </style>
