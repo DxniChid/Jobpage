@@ -3,7 +3,7 @@
 
 
 <script setup>
-import Header from './components/header.vue'
+
 
 import Job_Ad from './components/Job_Ad.vue';
 import { ref } from "vue";
