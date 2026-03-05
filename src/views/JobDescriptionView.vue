@@ -7,7 +7,8 @@ import Date from '@/components/date.vue'
 
 </script>
 
-<template>
+<template> 
+    <div @click="$router.push('/homepage')"><img src="@/images/back.png" id="back"></div>
     <div id="box">
         <div id="description">
             <JobDescription jobtitle="Lorem Ipsum" description="Soem sugus", requirements="Sugus" offer="Pizza"/>
@@ -33,7 +34,7 @@ import Date from '@/components/date.vue'
         display: flex;
         flex-direction: column;
     }
-   #address {
+    #address {
     display: flex;
     flex-direction: column;
     /* justify-content: space-between;  <-- REMOVE THIS */
@@ -41,8 +42,14 @@ import Date from '@/components/date.vue'
     gap: 20px;                        /* Add a specific gap instead */
     padding-right: 3%;
     padding-top: 1px;   
-}
+    }
+    #back{
+        height: 50px;
+        width: auto;
+        cursor: pointer;
+    }
   
+
 </style>
 
 
