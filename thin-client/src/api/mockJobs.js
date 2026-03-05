@@ -1,4 +1,39 @@
-// src/api/mockJobs.js
+/**
+ * Mock job data for testing and development.
+ *
+ * Provides a static array of sample job listings that match the expected
+ * API response format. Used as a fallback when the real API is unavailable
+ * or when `useMock` mode is enabled.
+ *
+ * @module mockJobs
+ */
+
+/**
+ * A collection of sample job objects for testing the Thin Client.
+ *
+ * Each job object conforms to the structure expected by the widget
+ * components (`JobItem`, filter functions, etc.) and mirrors the
+ * response format documented in `docs/api.md`.
+ *
+ * @constant {Array<Object>}
+ * @property {string} id - Unique job identifier.
+ * @property {string} title - Job title (German).
+ * @property {string} company - Employer name.
+ * @property {string} location - City of work.
+ * @property {string} category - Professional category (e.g., "IT").
+ * @property {string} region - Canton or region code (e.g., "BE").
+ * @property {string} description - Short job description (German).
+ * @property {boolean} homeOffice - Whether home office is possible.
+ * @property {string} language - Main language required.
+ * @property {string} workplace - Workplace type ("Remote", "Hybrid", "Vor Ort").
+ * @property {string} url - Link to the full job posting.
+ * @property {string} publishedAt - ISO 8601 publication date.
+ *
+ * @example
+ * import { mockJobs } from './mockJobs.js';
+ * console.log(mockJobs.length); // 6
+ * console.log(mockJobs[0].title); // "Frontend-Entwickler/in"
+ */
 export const mockJobs = [
 {
         id: '1',
