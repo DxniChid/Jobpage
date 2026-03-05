@@ -30,7 +30,7 @@
 export function filterJobs(jobs, filters) {
 	return jobs.filter(job => {
 		if (filters.category && job.category !== filters.category) return false;
-		if (filters.region && job.region !== filters.region) return false; // Canton
+		if (filters.region && job.canton !== filters.region) return false;
 
 		// Search over PLZ and City
 		if (filters.locationSearch) {
@@ -104,6 +104,6 @@ export function extractFilterOptions(jobs, filterNames) {
 export function extractStaticFilterOptions(jobs) {
 	return {
 		categories: [...new Set(jobs.map(j => j.category).filter(Boolean))],
-		regions: [...new Set(jobs.map(j => j.region).filter(Boolean))]
+		regions: [...new Set(jobs.map(j => j.canton).filter(Boolean))]
 	};
 }
