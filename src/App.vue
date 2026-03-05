@@ -82,6 +82,7 @@ function logOut(){
   <h4>079 90 00 00</h4>
   <h4>test@gmail.com</h4>
 </footer>
+<RouterView></RouterView>
 </template>
 
 <style scoped>

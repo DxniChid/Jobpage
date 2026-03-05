@@ -3,7 +3,7 @@
   <div class="page">
     <div class="container">
 
-      <div v-for="job in jobs" :key="job.id" class="card" @click="$router.push">
+      <div v-for="job in jobs" :key="job.id" class="card" @click="$router.push('/jobdescription')">
 
         <div class="left">
           <div class="title">{{ job.title }}</div>
