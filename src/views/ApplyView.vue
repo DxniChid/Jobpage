@@ -113,7 +113,7 @@ function handleFiles(event) {
 }
 
 .form-container {
-  background: #d9d9d9;
+  background: #f6f5f4;
   padding: 40px;
   width: 600px;
   border-radius: 20px;
@@ -139,7 +139,7 @@ h1 {
 
 input,
 textarea {
-  background: #eeeeee;
+  background: #ffffff;
   border: none;
   padding: 6px;
 }
