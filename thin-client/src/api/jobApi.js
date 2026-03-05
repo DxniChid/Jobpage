@@ -53,7 +53,7 @@ const DEFAULT_API_URL = 'https://api.jobs.bfo.ch';
  */
 export async function fetchJobs(apiUrl = DEFAULT_API_URL, useMock = false) {
 	if (useMock) {
-		console.log('🔧 Using mock job data (testing mode)');
+		console.log('Using mock job data (testing mode)');
 		return [...mockJobs];
 	}
 
@@ -65,7 +65,7 @@ export async function fetchJobs(apiUrl = DEFAULT_API_URL, useMock = false) {
 		const jobs = await response.json();
 		return jobs;
 	} catch (error) {
-		console.warn('⚠️ API fetch failed, falling back to mock data:', error);
+		console.warn('API fetch failed, falling back to mock data:', error);
 		return [...mockJobs];
 	}
 }

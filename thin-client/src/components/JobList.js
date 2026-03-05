@@ -27,7 +27,7 @@ import { createJobItem } from './JobItem.js';
  * ]);
  */
 export function renderJobList(container, jobs) {
-	container.innerHTML = ''; // Clear previous
+	container.innerHTML = '';
 	if (!jobs || jobs.length === 0) {
 		container.innerHTML = '<p class="no-jobs">Keine Stellenangebote gefunden.</p>';
 		return;

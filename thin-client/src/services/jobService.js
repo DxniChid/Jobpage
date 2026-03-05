@@ -28,21 +28,21 @@
  */
 // src/services/jobService.js
 export function filterJobs(jobs, filters) {
-    return jobs.filter(job => {
-        if (filters.category && job.category !== filters.category) return false;
-        if (filters.region && job.region !== filters.region) return false; // Kanton
-        
-        // Suche über Ort oder PLZ (Teilstring-Suche)
-        if (filters.locationSearch) {
-            const search = filters.locationSearch.toLowerCase();
-            const matchesZip = job.zip && job.zip.includes(search);
-            const matchesCity = job.location && job.location.toLowerCase().includes(search);
-            if (!matchesZip && !matchesCity) return false;
-        }
+	return jobs.filter(job => {
+		if (filters.category && job.category !== filters.category) return false;
+		if (filters.region && job.region !== filters.region) return false; // Canton
 
-        if (filters.homeOffice !== undefined && job.homeOffice !== filters.homeOffice) return false;
-        return true;
-    });
+		// Search over PLZ and City
+		if (filters.locationSearch) {
+			const search = filters.locationSearch.toLowerCase();
+			const matchesZip = job.zip && job.zip.includes(search);
+			const matchesCity = job.location && job.location.toLowerCase().includes(search);
+			if (!matchesZip && !matchesCity) return false;
+		}
+
+		if (filters.homeOffice !== undefined && job.homeOffice !== filters.homeOffice) return false;
+		return true;
+	});
 }
 
 /**

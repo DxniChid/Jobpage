@@ -36,22 +36,22 @@
  */
 export const mockJobs = [
 {
-        id: '1',
-        title: 'Frontend-Entwickler/in',
-        company: 'BFO AG',
-        location: 'Bern',
-        plz: '3000', // Neu
+		id: '1',
+		title: 'Frontend-Entwickler/in',
+		company: 'BFO AG',
+		location: 'Bern',
+		plz: '3000',
 		category: 'IT',
-        canton: 'BE', // Kanton
-        description: 'Entwicklung moderner Webapplikationen mit React.', 
-        requirements: 'Erfahrung mit JavaScript und CSS.', // Neu
-        benefits: 'Flexible Arbeitszeiten, modernes Büro.', // Neu
-        homeOffice: true,
-        language: 'Deutsch',
-        workplace: 'Hybrid',
-        url: 'https://jobs.bfo.ch/1',
-        publishedAt: '2026-02-01' // Datum der Ausstellung
-    },
+		canton: 'BE',
+		description: 'Entwicklung moderner Webapplikationen mit React.',
+		requirements: 'Erfahrung mit JavaScript und CSS.',
+		benefits: 'Flexible Arbeitszeiten, modernes Büro.',
+		homeOffice: true,
+		language: 'Deutsch',
+		workplace: 'Hybrid',
+		url: 'https://jobs.bfo.ch/1',
+		publishedAt: '2026-02-01'
+	},
 	{
 		id: '2',
 		title: 'Java-Entwickler/in',
