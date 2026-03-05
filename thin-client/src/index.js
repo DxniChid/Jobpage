@@ -52,6 +52,9 @@ class JobWidget {
 		 * @property {string[]} filterOptions - Array of additional filter names.
 		 * @property {string|undefined} styleEntry - URL to an external CSS file.
 		 * @property {string|undefined} styleSearchBar - Inline CSS rules.
+		 * @property {boolean} showSearchBar - Whether to render the text search field.
+		 * @property {string|undefined} searchBackgroundColor - Search input background color.
+		 * @property {string|undefined} searchPlaceholderColor - Search input placeholder color.
 		 * @property {boolean} useMock - Whether to force mock data.
 		 * @private
 		 */
@@ -114,6 +117,9 @@ class JobWidget {
 				: [],
 			styleEntry: container.dataset.styleEntry,
 			styleSearchBar: container.dataset.styleSearchBar,
+			showSearchBar: container.dataset.showSearchBar !== 'false',
+			searchBackgroundColor: container.dataset.searchBackgroundColor,
+			searchPlaceholderColor: container.dataset.searchPlaceholderColor,
 			// Allow forcing mock data via data-use-mock="true"
 			useMock: container.dataset.useMock === 'true',
 		};

@@ -21,10 +21,13 @@
  */
 function getCurrentFilters(filterBar) {
 	const filters = {};
-	const selects = filterBar.querySelectorAll('select');
-	selects.forEach((select) => {
-		const name = select.name;
-		let value = select.value;
+	const controls = filterBar.querySelectorAll('select, input[name="searchTerm"]');
+	controls.forEach((control) => {
+		const name = control.name;
+		let value = control.value;
+		if (typeof value === 'string') {
+			value = value.trim();
+		}
 		if (value === '') value = undefined; // No filter
 		if (name === 'homeOffice' && value !== undefined) {
 			value = value === 'true'; // Convert string to boolean
@@ -32,6 +35,17 @@ function getCurrentFilters(filterBar) {
 		filters[name] = value;
 	});
 	return filters;
+}
+
+/**
+ * Determines whether the keyword search field should be rendered.
+ *
+ * @private
+ * @param {Object} config - Widget configuration.
+ * @returns {boolean} `true` when search should be visible.
+ */
+function shouldRenderSearchBar(config) {
+	return config.showSearchBar !== false;
 }
 
 /**
@@ -74,6 +88,25 @@ function getCurrentFilters(filterBar) {
 export function createFilterBar(config, availableOptions, onFilterChange) {
 	const filterBar = document.createElement('div');
 	filterBar.className = 'job-client-filterbar';
+	if (config.searchBackgroundColor) {
+		filterBar.style.setProperty('--job-search-bg', config.searchBackgroundColor);
+	}
+	if (config.searchPlaceholderColor) {
+		filterBar.style.setProperty('--job-search-placeholder-color', config.searchPlaceholderColor);
+	}
+
+	// --- Keyword search ---
+	const searchWrapper = document.createElement('div');
+	searchWrapper.className = 'filter-group filter-group-search';
+	searchWrapper.innerHTML = `
+		<label for="filter-searchTerm">Suche</label>
+		<input
+			id="filter-searchTerm"
+			name="searchTerm"
+			type="search"
+			placeholder="Titel, Firma, Ort, Beschreibung"
+		/>
+	`;
 
 	// --- Category dropdown ---
 	const categoryWrapper = document.createElement('div');
@@ -101,6 +134,9 @@ export function createFilterBar(config, availableOptions, onFilterChange) {
 		</select>
 	`;
 
+	if (shouldRenderSearchBar(config)) {
+		filterBar.appendChild(searchWrapper);
+	}
 	filterBar.appendChild(categoryWrapper);
 	filterBar.appendChild(regionWrapper);
 
@@ -153,6 +189,12 @@ export function createFilterBar(config, availableOptions, onFilterChange) {
 	// Attach event listeners – use change event for selects
 	filterBar.addEventListener('change', (e) => {
 		if (e.target.matches('select')) {
+			const filters = getCurrentFilters(filterBar);
+			onFilterChange(filters);
+		}
+	});
+	filterBar.addEventListener('input', (e) => {
+		if (e.target.matches('input[name="searchTerm"]')) {
 			const filters = getCurrentFilters(filterBar);
 			onFilterChange(filters);
 		}

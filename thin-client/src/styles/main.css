@@ -34,6 +34,26 @@
 	border-radius: 4px;
 }
 
+.filter-group input {
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.filter-group-search {
+	min-width: 240px;
+	flex: 1 1 240px;
+}
+
+.filter-group-search input {
+	background-color: var(--job-search-bg, #fff);
+}
+
+.filter-group-search input::placeholder {
+	color: var(--job-search-placeholder-color, #757575);
+	opacity: 1;
+}
+
 .job-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

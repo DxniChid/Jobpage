@@ -12,20 +12,22 @@
 		<h1>Unsere offenen Stellen</h1>
 	</header>
 
-	<!-- 1. Platzhalter mit Konfiguration -->
+	<!-- 1. Placeholder with configurations -->
 	<div id="job-client"
 			data-api-url="https://api.jobs.bfo.ch"
 			data-category="IT"
 			data-region=""
 			data-language="CH-de"
 			data-filter-options='["HomeOffice", "Language", "Workplace"]'
+			data-show-search-bar="false"
+			data-search-background-color="#f0f6ff"
+			data-search-placeholder-color="#4e6f91"
 			data-style-entry="../src/styles/main.css"
-			data-style-search-bar="button { background-color: green; }"
 			data-use-mock="true">
 	</div>
 
-	<!-- 2. Einbindung des Thin Client Scripts -->
+	<!-- 2. Embedding the Thin-Client -->
 	<script type="module" src="../src/index.js"></script>
-	<!-- Hinweis: In der Produktion wird die gebündelte Datei verwendet -->
+	<!-- Hint: In the productive enviroment, the company's own file is going to be embedded  -->
 </body>
 </html>

@@ -29,6 +29,24 @@
 // src/services/jobService.js
 export function filterJobs(jobs, filters) {
 	return jobs.filter(job => {
+		if (filters.searchTerm) {
+			const search = filters.searchTerm.toLowerCase();
+			const searchableFields = [
+				job.title,
+				job.company,
+				job.location,
+				job.zip,
+				job.description,
+				job.requirements,
+				job.benefits,
+				job.category,
+			];
+			const hasMatch = searchableFields.some((field) =>
+				String(field || '').toLowerCase().includes(search)
+			);
+			if (!hasMatch) return false;
+		}
+
 		if (filters.category && job.category !== filters.category) return false;
 		if (filters.region && job.region !== filters.region) return false; // Canton
 
