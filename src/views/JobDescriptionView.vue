@@ -15,7 +15,8 @@ function goToApply() {
 }
 </script>
 
-<template>
+<template> 
+    <div @click="$router.push('/homepage')"><img src="@/images/back.png" id="back"></div>
     <div id="box">
         <div id="description">
             <JobDescription 
@@ -57,7 +58,7 @@ function goToApply() {
         display: flex;
         flex-direction: column;
     }
-   #address {
+    #address {
     display: flex;
     flex-direction: column;
 
@@ -65,7 +66,15 @@ function goToApply() {
     gap: 20px;                      
     padding-right: 3%;
     padding-top: 1px;   
-}
+    }
+    #back{
+        height: 50px;
+        width: auto;
+        cursor: pointer;
+    }
+  
+
+
 button{
     position: absolute;
     bottom: 15px;
