@@ -57,3 +57,13 @@ footer {
   text-align: center;
   color: white;
 }
+
+.logo-header {
+  position: absolute;
+  top: 9px;      
+  left: 50%;     
+  transform: translateX(-50%);
+  width: 100px;
+  height: auto;
+  z-index: 1000;
+}
