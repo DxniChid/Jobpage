@@ -10,7 +10,7 @@ function logout() {
 </script>
 
 <template>
-<header v-if="route.name !== 'login'">
+<header v-if="route.name !== 'login' && route.name !== 'register'">
   <Header title="Job Page" icon="src/images/pfp.webp"></Header>
     <h3>Meine Favoriten</h3>
     <h1>Jobpage</h1>
@@ -20,7 +20,7 @@ function logout() {
     </div>
   </header>
   <RouterView></RouterView>
-<footer v-if="route.name !== 'login'">
+<footer v-if="route.name !== 'login' && route.name !== 'register'">
   <h4>079 90 00 00</h4>
   <h4>test@gmail.com</h4>
   
