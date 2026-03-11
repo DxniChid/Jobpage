@@ -38,7 +38,7 @@ export default {
         return this.jobs;
       
 
-    },
+    }},
 
     methods: {
       toggleFavorite(id) {
@@ -49,7 +49,7 @@ export default {
         alert("Du wurdest ausgeloggt!");
       }
     }
-  }
+  
 
 }
 </script>
