@@ -1,8 +1,6 @@
 <template>
-  
   <div class="page">
     <div class="container">
-
       <div v-for="job in jobs" :key="job.id" class="card" >
         <div @click="$router.push('/jobdescription')">
           <div class="left">
@@ -25,12 +23,9 @@
             ♥
           </button>
         
-
       </div>
-
     </div>
   </div>
-  
 </template>
 
 <script setup>

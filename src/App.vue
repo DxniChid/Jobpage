@@ -12,7 +12,7 @@ function logout() {
 <template>
 <header v-if="route.name !== 'login' && route.name !== 'register'">
   <Header title="Job Page" icon="src/images/pfp.webp"></Header>
-    <h3>Meine Favoriten</h3>
+    <h3 @click="$router.push('/favorites')">Meine Favoriten</h3>
     <h1>Jobpage</h1>
     <div class="profile">
       <span>A.B.</span>
