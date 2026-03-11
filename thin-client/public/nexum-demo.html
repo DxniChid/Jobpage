@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Nexum – Join our mission</title>
+	<!-- Google Fonts: Poppins for a fresh, modern look -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<!-- Base styles for the widget -->
+	<link rel="stylesheet" href="../src/styles/main.css">
+	<style>
+		/* ----- Global reset & variables ----- */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--primary: #6c5ce7;
+			--primary-dark: #5649c0;
+			--secondary: #00d2ff;
+			--accent: #ff7675;
+			--dark: #2d3436;
+			--light: #f5f6fa;
+			--text: #2d3436;
+			--text-light: #636e72;
+			--bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			background-color: var(--light);
+			color: var(--text);
+			line-height: 1.6;
+		}
+
+		.container {
+			max-width: 1280px;
+			margin: 0 auto;
+			padding: 0 2rem;
+		}
+
+		/* ----- Header / Navigation ----- */
+		.navbar {
+			background: rgba(255,255,255,0.95);
+			backdrop-filter: blur(10px);
+			box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			padding: 1rem 0;
+		}
+
+		.navbar .container {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.logo {
+			font-size: 1.8rem;
+			font-weight: 800;
+			background: var(--bg-gradient);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			letter-spacing: -0.02em;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 2.5rem;
+			align-items: center;
+		}
+
+		.nav-links a {
+			text-decoration: none;
+			font-weight: 500;
+			color: var(--text);
+			transition: color 0.2s;
+		}
+		.nav-links a:hover {
+			color: var(--primary);
+		}
+
+		.btn-primary {
+			background: var(--bg-gradient);
+			color: white;
+			padding: 0.5rem 1.5rem;
+			border-radius: 50px;
+			font-weight: 600;
+			text-decoration: none;
+			transition: transform 0.2s, box-shadow 0.2s;
+			box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3);
+		}
+		.btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 12px 28px rgba(108, 92, 231, 0.4);
+		}
+
+		/* ----- Hero Section with split layout ----- */
+		.hero {
+			padding: 4rem 0 6rem;
+			background: white;
+			overflow: hidden;
+		}
+
+		.hero .container {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+			align-items: center;
+		}
+
+		.hero-content h1 {
+			font-size: 3.2rem;
+			font-weight: 800;
+			line-height: 1.2;
+			margin-bottom: 1.5rem;
+			background: var(--bg-gradient);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.hero-content p {
+			font-size: 1.2rem;
+			color: var(--text-light);
+			margin-bottom: 2rem;
+			max-width: 500px;
+		}
+
+		.hero-stats {
+			display: flex;
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+		.stat-item {
+			text-align: center;
+		}
+		.stat-number {
+			font-size: 2rem;
+			font-weight: 700;
+			color: var(--primary);
+		}
+		.stat-label {
+			color: var(--text-light);
+			font-size: 0.9rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.hero-image {
+			position: relative;
+		}
+		.hero-image img {
+			width: 100%;
+			border-radius: 20px;
+			box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+		}
+		.hero-image::before {
+			content: '';
+			position: absolute;
+			top: -20px;
+			right: -20px;
+			width: 100%;
+			height: 100%;
+			background: var(--bg-gradient);
+			border-radius: 20px;
+			z-index: -1;
+			opacity: 0.3;
+		}
+
+		/* ----- Company values / perks (cards) ----- */
+		.perks {
+			padding: 5rem 0;
+			background: #f0f2f5;
+		}
+		.perks h2 {
+			text-align: center;
+			font-size: 2.5rem;
+			font-weight: 700;
+			margin-bottom: 3rem;
+			color: var(--dark);
+		}
+		.perks-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 2rem;
+		}
+		.perk-card {
+			background: white;
+			padding: 2rem;
+			border-radius: 20px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+			transition: all 0.3s ease;
+			text-align: center;
+			border: 1px solid rgba(108, 92, 231, 0.1);
+		}
+		.perk-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 20px 40px rgba(108, 92, 231, 0.1);
+			border-color: var(--primary);
+		}
+		.perk-icon {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+		.perk-card h3 {
+			font-size: 1.4rem;
+			margin-bottom: 0.5rem;
+			color: var(--primary-dark);
+		}
+		.perk-card p {
+			color: var(--text-light);
+		}
+
+		/* ----- Job section with widget ----- */
+		.job-section {
+			padding: 4rem 0 6rem;
+			background: white;
+		}
+		.job-section h2 {
+			text-align: center;
+			font-size: 2.5rem;
+			font-weight: 700;
+			margin-bottom: 1rem;
+			color: var(--dark);
+		}
+		.job-section .subhead {
+			text-align: center;
+			color: var(--text-light);
+			font-size: 1.2rem;
+			max-width: 700px;
+			margin: 0 auto 3rem;
+		}
+
+		/* Custom widget styling to match Nexum branding */
+		#job-client {
+			--widget-primary: var(--primary);
+			--widget-secondary: var(--secondary);
+		}
+		/* Override filter bar background */
+		.filter-bar {
+			background: linear-gradient(135deg, #f5f0ff 0%, #eae5ff 100%) !important;
+			border-radius: 60px !important;
+			padding: 0.5rem 2rem !important;
+			box-shadow: 0 4px 20px rgba(108, 92, 231, 0.15) !important;
+		}
+		/* Style the job links */
+		.job-link {
+			background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+			border-radius: 40px !important;
+			font-weight: 600 !important;
+			padding: 0.6rem 1.5rem !important;
+			transition: opacity 0.2s !important;
+		}
+		.job-link:hover {
+			opacity: 0.9 !important;
+		}
+		/* Job cards */
+		.job-item {
+			border-radius: 20px !important;
+			background: white !important;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.03) !important;
+			border: 1px solid rgba(108, 92, 231, 0.1) !important;
+			transition: all 0.2s !important;
+		}
+		.job-item:hover {
+			border-color: var(--primary) !important;
+			box-shadow: 0 15px 35px rgba(108, 92, 231, 0.1) !important;
+		}
+		/* Search input */
+		.filter-bar input::placeholder {
+			color: var(--primary) !important;
+			opacity: 0.8;
+		}
+
+		/* ----- Testimonials (simple) ----- */
+		.testimonials {
+			padding: 5rem 0;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+		}
+		.testimonials h2 {
+			text-align: center;
+			font-size: 2.5rem;
+			margin-bottom: 3rem;
+		}
+		.testimonial-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 2rem;
+		}
+		.testimonial-card {
+			background: rgba(255,255,255,0.1);
+			backdrop-filter: blur(10px);
+			padding: 2rem;
+			border-radius: 20px;
+			border: 1px solid rgba(255,255,255,0.2);
+		}
+		.testimonial-card p {
+			font-style: italic;
+			margin-bottom: 1.5rem;
+			font-size: 1.1rem;
+		}
+		.testimonial-author {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+		.author-avatar {
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background: var(--secondary);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: bold;
+			font-size: 1.2rem;
+		}
+		.author-info h4 {
+			font-size: 1.1rem;
+		}
+		.author-info span {
+			font-size: 0.9rem;
+			opacity: 0.8;
+		}
+
+		/* ----- Footer ----- */
+		.footer {
+			background: var(--dark);
+			color: white;
+			padding: 3rem 0;
+		}
+		.footer .container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1.5rem;
+		}
+		.footer-links {
+			display: flex;
+			gap: 2rem;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		.footer-links a {
+			color: rgba(255,255,255,0.7);
+			text-decoration: none;
+		}
+		.footer-links a:hover {
+			color: white;
+		}
+		.copyright {
+			color: rgba(255,255,255,0.5);
+			font-size: 0.9rem;
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.hero .container {
+				grid-template-columns: 1fr;
+				text-align: center;
+			}
+			.hero-content p {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.hero-stats {
+				justify-content: center;
+			}
+			.nav-links {
+				display: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar">
+		<div class="container">
+			<div class="logo">nexum</div>
+			<div class="nav-links">
+				<a href="#">Home</a>
+				<a href="#">Tech</a>
+				<a href="#">Karriere</a>
+				<a href="#">Blog</a>
+				<a href="#" class="btn-primary">Kontakt</a>
+			</div>
+		</div>
+	</nav>
+
+	<section class="hero">
+		<div class="container">
+			<div class="hero-content">
+				<h1>Shape the future <br>with us.</h1>
+				<p>Wir entwickeln die nächste Generation digitaler Produkte. Werde Teil eines Teams, das Technologie neu denkt.</p>
+				<div class="hero-stats">
+					<div class="stat-item">
+						<div class="stat-number">46+</div>
+						<div class="stat-label">offene Stellen</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-number">100%</div>
+						<div class="stat-label">Homeoffice möglich</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-number">5</div>
+						<div class="stat-label">Standorte</div>
+					</div>
+				</div>
+			</div>
+			<div class="hero-image">
+				<!-- placeholder image (you can replace with actual) -->
+				<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Team at work">
+			</div>
+		</div>
+	</section>
+
+	<section class="perks">
+		<div class="container">
+			<h2>Warum Nexum?</h2>
+			<div class="perks-grid">
+				<div class="perk-card">
+					<div class="perk-icon">🧠</div>
+					<h3>Herausfordernde Projekte</h3>
+					<p>Arbeite an KI, Cloud und modernsten Architekturen.</p>
+				</div>
+				<div class="perk-card">
+					<div class="perk-icon">🌍</div>
+					<h3>Remote first</h3>
+					<p>Homeoffice, Hybrid oder im Büro – du entscheidest.</p>
+				</div>
+				<div class="perk-card">
+					<div class="perk-icon">📚</div>
+					<h3>Weiterbildung</h3>
+					<p>Individuelles Budget für Konferenzen, Kurse und Zertifikate.</p>
+				</div>
+				<div class="perk-card">
+					<div class="perk-icon">🍻</div>
+					<h3>Tolle Kultur</h3>
+					<p>Regelmässige Events, flache Hierarchien, offene Kommunikation.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="job-section" id="jobs">
+		<div class="container">
+			<h2>Offene Stellen</h2>
+			<p class="subhead">Finde den Job, der zu dir passt. Mit unseren Filtern kannst du gezielt nach Homeoffice und Arbeitsmodell suchen.</p>
+
+			<!-- Thin Client Widget with custom config -->
+			<div id="job-client"
+				 data-api-url="https://api.jobs.bfo.ch"
+				 data-filter-options='["HomeOffice","Workplace"]'
+				 data-show-search-bar="true"
+				 data-search-background-color="#ffffff"
+				 data-search-placeholder-color="#6c5ce7"
+				 data-use-mock="true">
+			</div>
+		</div>
+	</section>
+
+	<section class="testimonials">
+		<div class="container">
+			<h2>Das sagen unsere Mitarbeiter:innen</h2>
+			<div class="testimonial-grid">
+				<div class="testimonial-card">
+					<p>„Die Freiheit, remote zu arbeiten, und gleichzeitig das Gefühl, Teil eines gross	artigen Teams zu sein – das ist Nexum für mich.“</p>
+					<div class="testimonial-author">
+						<div class="author-avatar">L</div>
+						<div class="author-info">
+							<h4>Laura Meier</h4>
+							<span>Software Engineer</span>
+						</div>
+					</div>
+				</div>
+				<div class="testimonial-card">
+					<p>„Innovation wird hier gross	geschrieben. Jeder kann Ideen einbringen und etwas bewegen.“</p>
+					<div class="testimonial-author">
+						<div class="author-avatar">M</div>
+						<div class="author-info">
+							<h4>Marco Rossi</h4>
+							<span>Product Owner</span>
+						</div>
+					</div>
+				</div>
+				<div class="testimonial-card">
+					<p>„Die Work-Life-Balance ist hervorragend. Und die Weiterbildungsmöglichkeiten sind einmalig.“</p>
+					<div class="testimonial-author">
+						<div class="author-avatar">S</div>
+						<div class="author-info">
+							<h4>Sabine Keller</h4>
+							<span>UX Designerin</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="logo" style="color: white; background: none; -webkit-text-fill-color: white;">nexum</div>
+			<div class="footer-links">
+				<a href="#">Impressum</a>
+				<a href="#">Datenschutz</a>
+				<a href="#">AGB</a>
+				<a href="#">Karriere</a>
+				<a href="#">Kontakt</a>
+			</div>
+			<div class="copyright">
+				© 2026 Nexum AG. Alle Rechte vorbehalten.
+			</div>
+		</div>
+	</footer>
+
+	<!-- Thin Client entrypoint -->
+	<script type="module" src="../src/index.js"></script>
+</body>
+</html>
