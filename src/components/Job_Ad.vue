@@ -3,18 +3,20 @@
   <div class="page">
     <div class="container">
 
-      <div v-for="job in jobs" :key="job.id" class="card" @click="$router.push">
-
-        <div class="left">
-          <div class="title">{{ job.title }}</div>
-          <div class="company">{{ job.company }}</div>
-        </div>
-
-        <div class="right">
-          <div class="location">
-            📍 {{ job.city }}, {{ job.zip }} | {{ job.canton }}
+      <div v-for="job in jobs" :key="job.id" class="card" >
+        <div @click="$router.push('/jobdescription')">
+          <div class="left">
+            <div class="title">{{ job.title }}</div>
+            <div class="company">{{ job.company }}</div>
           </div>
-
+        </div>
+        
+          <div class="right" @click="$router.push('/jobdescription')">
+            <div class="location">
+              📍 {{ job.city }}, {{ job.zip }} | {{ job.canton }}
+            </div>
+          </div>
+        
           <button
             class="heart"
             :class="{ active: job.favorite }"
@@ -22,7 +24,7 @@
           >
             ♥
           </button>
-        </div>
+        
 
       </div>
 
@@ -99,6 +101,7 @@ defineEmits(["toggle-favorite"])
 .location {
   font-size: 14px;
   color: #444;
+  margin-left: 250px;
 }
 
 .heart {
@@ -108,6 +111,7 @@ defineEmits(["toggle-favorite"])
   cursor: pointer;
   color: #6b5a8e;
   transition: 0.15s;
+  z-index: 28;
 }
 
 .heart.active {
