@@ -1,23 +1,18 @@
 
-
-
-
 <script setup>
-
-
-
-
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter() 
 import './assets/style.css'
-
-
-
-
+function logout() {
+  router.push({ name: 'login' }); 
+}
 </script>
 
 <template>
-  <header>
+<header v-if="route.name !== 'login' && route.name !== 'register'">
   <Header title="Job Page" icon="src/images/pfp.webp"></Header>
-    <h3>Meine Favoriten</h3>
+    <h3 @click="$router.push('/favorites')">Meine Favoriten</h3>
     <h1>Jobpage</h1>
     <div class="profile">
       <span>A.B.</span>
@@ -25,9 +20,10 @@ import './assets/style.css'
     </div>
   </header>
   <RouterView></RouterView>
-<footer>
+<footer v-if="route.name !== 'login' && route.name !== 'register'">
   <h4>079 90 00 00</h4>
   <h4>test@gmail.com</h4>
+  
 </footer>
 
 </template>
