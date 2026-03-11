@@ -13,11 +13,11 @@
  * @function
  * @param {Array<Object>} jobs - Full list of job objects.
  * @param {Object} filters - Current filter values.
- * @param {string} [filters.category] - Job category to match (e.g., "IT").
- * @param {string} [filters.region] - Job region to match (e.g., "BE").
- * @param {boolean} [filters.homeOffice] - Whether home office is possible (`true`/`false`).
- * @param {string} [filters.language] - Required language (e.g., "German").
- * @param {string} [filters.workplace] - Workplace type (e.g., "Remote", "Hybrid").
+ * @param {string|string[]} [filters.category] - Job category or categories to match.
+ * @param {string|string[]} [filters.region] - Job region or regions to match.
+ * @param {boolean|boolean[]} [filters.homeOffice] - Home office values to match.
+ * @param {string|string[]} [filters.language] - Required languages.
+ * @param {string|string[]} [filters.workplace] - Workplace types.
  * @returns {Array<Object>} Filtered array of jobs that match **all** provided criteria.
  *
  * @example
@@ -47,8 +47,8 @@ export function filterJobs(jobs, filters) {
 			if (!hasMatch) return false;
 		}
 
-		if (filters.category && job.category !== filters.category) return false;
-		if (filters.region && job.canton !== filters.region) return false;
+		if (!matchesFilterValue(job.category, filters.category)) return false;
+		if (!matchesFilterValue(job.canton, filters.region)) return false;
 
 		// Search over PLZ and City
 		if (filters.locationSearch) {
@@ -58,9 +58,26 @@ export function filterJobs(jobs, filters) {
 			if (!matchesZip && !matchesCity) return false;
 		}
 
-		if (filters.homeOffice !== undefined && job.homeOffice !== filters.homeOffice) return false;
+		if (!matchesFilterValue(job.homeOffice, filters.homeOffice)) return false;
+		if (!matchesFilterValue(job.language, filters.language)) return false;
+		if (!matchesFilterValue(job.workplace, filters.workplace)) return false;
 		return true;
 	});
+}
+
+function matchesFilterValue(jobValue, filterValue) {
+	if (filterValue === undefined) {
+		return true;
+	}
+
+	if (Array.isArray(filterValue)) {
+		if (filterValue.length === 0) {
+			return true;
+		}
+		return filterValue.includes(jobValue);
+	}
+
+	return jobValue === filterValue;
 }
 
 /**
