@@ -6,84 +6,293 @@
  * @module FilterBar
  */
 
+const FILTER_LABELS = {
+	category: 'Kategorie',
+	region: 'Region',
+	homeOffice: 'Home Office',
+	language: 'Sprache',
+	workplace: 'Arbeitsort',
+	searchTerm: 'Suche',
+};
+
+const FILTER_SUMMARY_LABELS = {
+	category: 'Kategorien',
+	region: 'Regionen',
+	homeOffice: 'Optionen',
+	language: 'Sprachen',
+	workplace: 'Arbeitsorte',
+};
+
 /**
- * Reads current filter values from all `<select>` elements inside the filter bar.
+ * Reads current filter values from the filter bar.
  *
  * @private
  * @function
  * @param {HTMLElement} filterBar - The filter bar DOM element.
- * @returns {Object.<string, (string|boolean|undefined)>} Filter values keyed by select name.
- *	 - `category` {string|undefined} Selected category or `undefined` for "Alle".
- *	 - `region` {string|undefined} Selected region or `undefined` for "Alle".
- *	 - `homeOffice` {boolean|undefined} `true`, `false`, or `undefined` for "Alle".
- *	 - `language` {string|undefined} Selected language or `undefined` for "Alle".
- *	 - `workplace` {string|undefined} Selected workplace or `undefined` for "Alle".
+ * @returns {Object.<string, (string|Array<string>|Array<boolean>|undefined)>}
+ *	 Current filter values keyed by filter name.
  */
 function getCurrentFilters(filterBar) {
 	const filters = {};
-	const controls = filterBar.querySelectorAll('select, input[name="searchTerm"]');
-	controls.forEach((control) => {
-		const name = control.name;
-		let value = control.value;
-		if (typeof value === 'string') {
-			value = value.trim();
+	const searchInput = filterBar.querySelector('input[name="searchTerm"]');
+	if (searchInput) {
+		const searchValue = searchInput.value.trim();
+		filters.searchTerm = searchValue || undefined;
+	}
+
+	filterBar.querySelectorAll('[data-filter-group]').forEach((group) => {
+		const name = group.dataset.filterGroup;
+		const optionCount = Number(group.dataset.optionCount || 0);
+		const selectedValues = Array.from(
+			group.querySelectorAll('input[type="checkbox"]:checked'),
+			(input) => normalizeFilterValue(name, input.value)
+		).filter((value) => value !== undefined);
+
+		if (selectedValues.length === 0 || (optionCount > 0 && selectedValues.length === optionCount)) {
+			filters[name] = undefined;
+			return;
 		}
-		if (value === '') value = undefined; // No filter
-		if (name === 'homeOffice' && value !== undefined) {
-			value = value === 'true'; // Convert string to boolean
-		}
-		filters[name] = value;
+
+		filters[name] = selectedValues;
 	});
+
 	return filters;
 }
 
-/**
- * Determines whether the keyword search field should be rendered.
- *
- * @private
- * @param {Object} config - Widget configuration.
- * @returns {boolean} `true` when search should be visible.
- */
+function normalizeConfiguredValues(value) {
+	if (Array.isArray(value)) {
+		return value.map((entry) => String(entry).trim()).filter(Boolean);
+	}
+
+	if (typeof value !== 'string') {
+		return [];
+	}
+
+	const trimmedValue = value.trim();
+	if (!trimmedValue) {
+		return [];
+	}
+
+	if (trimmedValue.startsWith('[')) {
+		try {
+			const parsedValue = JSON.parse(trimmedValue);
+			if (Array.isArray(parsedValue)) {
+				return parsedValue.map((entry) => String(entry).trim()).filter(Boolean);
+			}
+		} catch (error) {
+			// Fall back to comma-separated values.
+		}
+	}
+
+	return trimmedValue.split(',').map((entry) => entry.trim()).filter(Boolean);
+}
+
+function normalizeFilterValue(name, value) {
+	if (typeof value !== 'string') {
+		return value;
+	}
+
+	const trimmedValue = value.trim();
+	if (!trimmedValue) {
+		return undefined;
+	}
+
+	if (name === 'homeOffice') {
+		return trimmedValue === 'true';
+	}
+
+	return trimmedValue;
+}
+
+function getDisplayValue(name, value) {
+	if (name === 'homeOffice') {
+		return value === true ? 'Ja' : 'Nein';
+	}
+
+	return String(value);
+}
+
+function getSummaryText(name, selectedValues) {
+	if (!selectedValues || selectedValues.length === 0) {
+		return 'Alle';
+	}
+
+	if (selectedValues.length === 1) {
+		return getDisplayValue(name, selectedValues[0]);
+	}
+
+	return `${selectedValues.length} ${FILTER_SUMMARY_LABELS[name] || 'ausgewaehlt'}`;
+}
+
+function updateGroupSummary(group) {
+	const summaryLabel = group.querySelector('[data-filter-summary]');
+	if (!summaryLabel) {
+		return;
+	}
+
+	const name = group.dataset.filterGroup;
+	const selectedValues = Array.from(
+		group.querySelectorAll('input[type="checkbox"]:checked'),
+		(input) => normalizeFilterValue(name, input.value)
+	).filter((value) => value !== undefined);
+
+	summaryLabel.textContent = getSummaryText(name, selectedValues);
+}
+
+function updateAllGroupSummaries(filterBar) {
+	filterBar.querySelectorAll('[data-filter-group]').forEach((group) => {
+		updateGroupSummary(group);
+	});
+}
+
+function clearFilterGroup(filterBar, filterName) {
+	const group = filterBar.querySelector(`[data-filter-group="${filterName}"]`);
+	if (!group) {
+		return;
+	}
+
+	group.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+		input.checked = false;
+	});
+	updateGroupSummary(group);
+}
+
+function closeAllDropdowns(filterBar, exceptGroup = null) {
+	filterBar.querySelectorAll('[data-filter-group]').forEach((group) => {
+		if (group !== exceptGroup) {
+			group.open = false;
+		}
+	});
+}
+
+function renderActiveFilterChips(filterBar, onFilterChange) {
+	const chipRow = filterBar.querySelector('[data-active-filters]');
+	if (!chipRow) {
+		return;
+	}
+
+	const filters = getCurrentFilters(filterBar);
+	const chips = [];
+
+	['category', 'region', 'homeOffice', 'language', 'workplace'].forEach((name) => {
+		if (!Array.isArray(filters[name]) || filters[name].length === 0) {
+			return;
+		}
+
+		chips.push({
+			label: FILTER_LABELS[name],
+			value: filters[name].map((entry) => getDisplayValue(name, entry)).join(', '),
+			onRemove: () => {
+				clearFilterGroup(filterBar, name);
+				renderActiveFilterChips(filterBar, onFilterChange);
+				onFilterChange(getCurrentFilters(filterBar));
+			},
+		});
+	});
+
+	if (filters.searchTerm) {
+		chips.push({
+			label: FILTER_LABELS.searchTerm,
+			value: filters.searchTerm,
+			onRemove: () => {
+				const searchInput = filterBar.querySelector('input[name="searchTerm"]');
+				if (searchInput) {
+					searchInput.value = '';
+				}
+				renderActiveFilterChips(filterBar, onFilterChange);
+				onFilterChange(getCurrentFilters(filterBar));
+			},
+		});
+	}
+
+	chipRow.innerHTML = '';
+
+	if (chips.length === 0) {
+		chipRow.hidden = true;
+		return;
+	}
+
+	chipRow.hidden = false;
+	chips.forEach((chip) => {
+		const button = document.createElement('button');
+		button.type = 'button';
+		button.className = 'active-filter-chip';
+		button.innerHTML = `
+			<span class="active-filter-chip-label">${chip.label}</span>
+			<span class="active-filter-chip-value">${chip.value}</span>
+			<span class="active-filter-chip-remove" aria-hidden="true">x</span>
+		`;
+		button.addEventListener('click', chip.onRemove);
+		chipRow.appendChild(button);
+	});
+
+	const clearButton = document.createElement('button');
+	clearButton.type = 'button';
+	clearButton.className = 'active-filter-chip active-filter-chip-clear';
+	clearButton.innerHTML = `
+		<span class="active-filter-chip-label">Alle Filter loeschen</span>
+		<span class="active-filter-chip-remove" aria-hidden="true">x</span>
+	`;
+	clearButton.addEventListener('click', () => {
+		filterBar.querySelectorAll('[data-filter-group] input[type="checkbox"]').forEach((input) => {
+			input.checked = false;
+		});
+		const searchInput = filterBar.querySelector('input[name="searchTerm"]');
+		if (searchInput) {
+			searchInput.value = '';
+		}
+		updateAllGroupSummaries(filterBar);
+		renderActiveFilterChips(filterBar, onFilterChange);
+		onFilterChange(getCurrentFilters(filterBar));
+	});
+	chipRow.appendChild(clearButton);
+}
+
 function shouldRenderSearchBar(config) {
 	return config.showSearchBar !== false;
 }
 
+function createMultiSelectGroup(filterName, options, selectedValues = []) {
+	const wrapper = document.createElement('div');
+	wrapper.className = 'filter-group';
+	wrapper.innerHTML = `
+		<label for="filter-${filterName}-trigger">${FILTER_LABELS[filterName]}</label>
+		<details
+			class="multi-select"
+			data-filter-group="${filterName}"
+			data-option-count="${options.length}"
+		>
+			<summary id="filter-${filterName}-trigger">
+				<span data-filter-summary>${getSummaryText(filterName, selectedValues)}</span>
+			</summary>
+			<div class="multi-select-options">
+				${options.map((option) => {
+					const optionValue = String(option.value);
+					return `
+						<label class="multi-select-option">
+							<input
+								type="checkbox"
+								value="${optionValue}"
+								${selectedValues.includes(optionValue) ? 'checked' : ''}
+							/>
+							<span>${option.label}</span>
+						</label>
+					`;
+				}).join('')}
+			</div>
+		</details>
+	`;
+	return wrapper;
+}
+
 /**
- * Creates the filter bar DOM element and attaches change event listeners.
- *
- * Generates a `<div class="job-client-filterbar">` containing dropdowns for:
- * - Category (from `availableOptions.categories`)
- * - Region (from `availableOptions.regions`)
- * - Additional filters listed in `config.filterOptions` (HomeOffice, Language, Workplace)
- *
- * Pre‑selects category and region if `config.category` / `config.region` are provided.
- * Emits the current filter set via `onFilterChange` whenever a dropdown value changes.
+ * Creates the filter bar DOM element and attaches event listeners.
  *
  * @function
- * @param {Object} config - Widget configuration (parsed from `data-*` attributes).
- * @param {string} [config.apiUrl] - Base URL of the job API (unused here, but part of config).
- * @param {string} [config.category] - Pre‑selected category.
- * @param {string} [config.region] - Pre‑selected region.
- * @param {string} [config.language] - Default language (unused here).
- * @param {string[]} config.filterOptions - Array of additional filter names.
- *	 Possible values: `"HomeOffice"`, `"Language"`, `"Workplace"`.
+ * @param {Object} config - Widget configuration.
  * @param {Object} availableOptions - Possible values for static and dynamic filters.
- * @param {string[]} [availableOptions.categories] - Unique category values from all jobs.
- * @param {string[]} [availableOptions.regions] - Unique region values from all jobs.
- * @param {string[]} [availableOptions.language] - Unique language values from all jobs.
- * @param {string[]} [availableOptions.workplace] - Unique workplace values from all jobs.
- * @param {Array} [availableOptions.homeOffice] - Not used (HomeOffice is boolean).
  * @param {Function} onFilterChange - Callback invoked whenever a filter value changes.
- *	 Receives the current filter object (same shape as returned by `getCurrentFilters`).
  * @returns {HTMLElement} The fully constructed filter bar element.
- *
- * @example
- * const filterBar = createFilterBar(
- *	 { category: 'IT', filterOptions: ['HomeOffice'] },
- *	 { categories: ['IT', 'Marketing'], regions: ['BE', 'ZH'] },
- *	 (filters) => applyFilters(filters)
- * );
- * container.appendChild(filterBar);
  */
 export function createFilterBar(config, availableOptions, onFilterChange) {
 	const filterBar = document.createElement('div');
@@ -95,7 +304,6 @@ export function createFilterBar(config, availableOptions, onFilterChange) {
 		filterBar.style.setProperty('--job-search-placeholder-color', config.searchPlaceholderColor);
 	}
 
-	// --- Keyword search ---
 	const searchWrapper = document.createElement('div');
 	searchWrapper.className = 'filter-group filter-group-search';
 	searchWrapper.innerHTML = `
@@ -108,107 +316,98 @@ export function createFilterBar(config, availableOptions, onFilterChange) {
 		/>
 	`;
 
-	// --- Category dropdown ---
-	const categoryWrapper = document.createElement('div');
-	categoryWrapper.className = 'filter-group';
-	categoryWrapper.innerHTML = `
-		<label for="filter-category">Kategorie</label>
-		<select id="filter-category" name="category">
-			<option value="">Alle</option>
-			${(availableOptions.categories || [])
-				.map((cat) => `<option value="${cat}">${cat}</option>`)
-				.join('')}
-		</select>
-	`;
-
-	// --- Region dropdown ---
-	const regionWrapper = document.createElement('div');
-	regionWrapper.className = 'filter-group';
-	regionWrapper.innerHTML = `
-		<label for="filter-region">Region</label>
-		<select id="filter-region" name="region">
-			<option value="">Alle</option>
-			${(availableOptions.regions || [])
-				.map((reg) => `<option value="${reg}">${reg}</option>`)
-				.join('')}
-		</select>
-	`;
+	const selectedCategories = normalizeConfiguredValues(config.category);
+	const selectedRegions = normalizeConfiguredValues(config.region);
 
 	if (shouldRenderSearchBar(config)) {
 		filterBar.appendChild(searchWrapper);
 	}
-	filterBar.appendChild(categoryWrapper);
-	filterBar.appendChild(regionWrapper);
 
-	// --- Dynamic filters (e.g., HomeOffice, Language, Workplace) ---
+	filterBar.appendChild(createMultiSelectGroup(
+		'category',
+		(availableOptions.categories || []).map((value) => ({ value, label: value })),
+		selectedCategories
+	));
+
+	filterBar.appendChild(createMultiSelectGroup(
+		'region',
+		(availableOptions.regions || []).map((value) => ({ value, label: value })),
+		selectedRegions
+	));
+
 	if (config.filterOptions) {
 		config.filterOptions.forEach((filterName) => {
 			const key = filterName.toLowerCase();
 			if (key === 'homeoffice') {
-				const wrapper = document.createElement('div');
-				wrapper.className = 'filter-group';
-				wrapper.innerHTML = `
-					<label for="filter-homeOffice">Home Office</label>
-					<select id="filter-homeOffice" name="homeOffice">
-						<option value="">Alle</option>
-						<option value="true">Ja</option>
-						<option value="false">Nein</option>
-					</select>
-				`;
-				filterBar.appendChild(wrapper);
+				filterBar.appendChild(createMultiSelectGroup(
+					'homeOffice',
+					[
+						{ value: 'true', label: 'Ja' },
+						{ value: 'false', label: 'Nein' },
+					]
+				));
 			} else if (key === 'language' && availableOptions.language) {
-				const wrapper = document.createElement('div');
-				wrapper.className = 'filter-group';
-				wrapper.innerHTML = `
-					<label for="filter-language">Sprache</label>
-					<select id="filter-language" name="language">
-						<option value="">Alle</option>
-						${availableOptions.language
-							.map((lang) => `<option value="${lang}">${lang}</option>`)
-							.join('')}
-					</select>
-				`;
-				filterBar.appendChild(wrapper);
+				filterBar.appendChild(createMultiSelectGroup(
+					'language',
+					availableOptions.language.map((value) => ({ value, label: value }))
+				));
 			} else if (key === 'workplace' && availableOptions.workplace) {
-				const wrapper = document.createElement('div');
-				wrapper.className = 'filter-group';
-				wrapper.innerHTML = `
-					<label for="filter-workplace">Arbeitsort</label>
-					<select id="filter-workplace" name="workplace">
-						<option value="">Alle</option>
-						${availableOptions.workplace
-							.map((wp) => `<option value="${wp}">${wp}</option>`)
-							.join('')}
-					</select>
-				`;
-				filterBar.appendChild(wrapper);
+				filterBar.appendChild(createMultiSelectGroup(
+					'workplace',
+					availableOptions.workplace.map((value) => ({ value, label: value }))
+				));
 			}
 		});
 	}
 
-	// Attach event listeners – use change event for selects
+	const activeFiltersWrapper = document.createElement('div');
+	activeFiltersWrapper.className = 'active-filter-row';
+	activeFiltersWrapper.hidden = true;
+	activeFiltersWrapper.setAttribute('data-active-filters', '');
+	filterBar.appendChild(activeFiltersWrapper);
+
 	filterBar.addEventListener('change', (e) => {
-		if (e.target.matches('select')) {
-			const filters = getCurrentFilters(filterBar);
-			onFilterChange(filters);
+		if (!e.target.matches('input[type="checkbox"]')) {
+			return;
 		}
+
+		const group = e.target.closest('[data-filter-group]');
+		if (!group) {
+			return;
+		}
+
+		updateGroupSummary(group);
+		group.open = false;
+		renderActiveFilterChips(filterBar, onFilterChange);
+		onFilterChange(getCurrentFilters(filterBar));
 	});
+
+	filterBar.addEventListener('toggle', (e) => {
+		const group = e.target;
+		if (!group.matches('[data-filter-group]')) {
+			return;
+		}
+
+		if (group.open) {
+			closeAllDropdowns(filterBar, group);
+		}
+	}, true);
+
+	document.addEventListener('pointerdown', (e) => {
+		if (!filterBar.contains(e.target)) {
+			closeAllDropdowns(filterBar);
+		}
+	}, true);
+
 	filterBar.addEventListener('input', (e) => {
 		if (e.target.matches('input[name="searchTerm"]')) {
-			const filters = getCurrentFilters(filterBar);
-			onFilterChange(filters);
+			renderActiveFilterChips(filterBar, onFilterChange);
+			onFilterChange(getCurrentFilters(filterBar));
 		}
 	});
 
-	// Preselect values from config (e.g., data-category, data-region)
-	if (config.category) {
-		const catSelect = filterBar.querySelector('#filter-category');
-		if (catSelect) catSelect.value = config.category;
-	}
-	if (config.region) {
-		const regSelect = filterBar.querySelector('#filter-region');
-		if (regSelect) regSelect.value = config.region;
-	}
+	updateAllGroupSummaries(filterBar);
+	renderActiveFilterChips(filterBar, onFilterChange);
 
 	return filterBar;
 }

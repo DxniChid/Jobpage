@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Karriere bei BFO – Jobs & Bewerbung</title>
+	<!-- Google Fonts for a modern look -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+	<!-- Base styles for the widget (can be overridden) -->
+	<link rel="stylesheet" href="../src/styles/main.css">
+	<style>
+		/* Global styles for the demo page */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Inter', sans-serif;
+			background-color: #f9fafc;
+			color: #1e293b;
+			line-height: 1.5;
+		}
+
+		.container {
+			max-width: 1280px;
+			margin: 0 auto;
+			padding: 0 2rem;
+		}
+
+		/* Header */
+		.site-header {
+			background-color: #ffffff;
+			box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+			padding: 1rem 0;
+			position: sticky;
+			top: 0;
+			z-index: 10;
+		}
+
+		.header-content {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.logo {
+			font-size: 1.5rem;
+			font-weight: 700;
+			color: #0f3b5e;
+			letter-spacing: -0.02em;
+		}
+
+		.logo span {
+			color: #2a9d8f;
+		}
+
+		.nav-links {
+			display: flex;
+			gap: 2rem;
+		}
+
+		.nav-links a {
+			text-decoration: none;
+			color: #475569;
+			font-weight: 500;
+			transition: color 0.2s;
+		}
+
+		.nav-links a:hover,
+		.nav-links a.active {
+			color: #0f3b5e;
+		}
+
+		.btn-outline {
+			border: 1px solid #2a9d8f;
+			color: #2a9d8f;
+			padding: 0.5rem 1.25rem;
+			border-radius: 9999px;
+			font-weight: 600;
+			text-decoration: none;
+			transition: all 0.2s;
+		}
+
+		.btn-outline:hover {
+			background-color: #2a9d8f;
+			color: white;
+		}
+
+		/* Hero section */
+		.hero {
+			background: linear-gradient(135deg, #f0f9ff 0%, #e6f2f7 100%);
+			padding: 4rem 0;
+			margin-bottom: 2rem;
+		}
+
+		.hero .container {
+			display: flex;
+			align-items: center;
+			gap: 4rem;
+		}
+
+		.hero-text {
+			flex: 1;
+		}
+
+		.hero-text h1 {
+			font-size: 3rem;
+			font-weight: 700;
+			line-height: 1.2;
+			color: #0f3b5e;
+			margin-bottom: 1.5rem;
+		}
+
+		.hero-text p {
+			font-size: 1.25rem;
+			color: #334155;
+			margin-bottom: 2rem;
+			max-width: 540px;
+		}
+
+		.hero-badge {
+			display: inline-block;
+			background-color: rgba(42, 157, 143, 0.15);
+			color: #2a9d8f;
+			font-weight: 600;
+			padding: 0.5rem 1rem;
+			border-radius: 9999px;
+			font-size: 0.9rem;
+			margin-bottom: 1rem;
+		}
+
+		.hero-image {
+			flex: 1;
+			text-align: center;
+		}
+
+		.hero-image svg {
+			max-width: 100%;
+			height: auto;
+		}
+
+		/* Values section */
+		.values {
+			padding: 4rem 0;
+			background-color: #ffffff;
+		}
+
+		.section-title {
+			font-size: 2rem;
+			font-weight: 700;
+			color: #0f3b5e;
+			text-align: center;
+			margin-bottom: 3rem;
+		}
+
+		.values-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 2rem;
+		}
+
+		.value-card {
+			background-color: #f8fafc;
+			border-radius: 1rem;
+			padding: 2rem;
+			text-align: center;
+			transition: transform 0.2s, box-shadow 0.2s;
+		}
+
+		.value-card:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
+		}
+
+		.value-icon {
+			font-size: 2.5rem;
+			margin-bottom: 1rem;
+		}
+
+		.value-card h3 {
+			font-size: 1.25rem;
+			margin-bottom: 0.5rem;
+			color: #0f3b5e;
+		}
+
+		.value-card p {
+			color: #64748b;
+		}
+
+		/* Job section */
+		.job-section {
+			padding: 3rem 0 5rem;
+			background-color: #f9fafc;
+		}
+
+		.job-section .section-title {
+			margin-bottom: 1rem;
+		}
+
+		.section-sub {
+			text-align: center;
+			color: #64748b;
+			max-width: 720px;
+			margin: 0 auto 3rem;
+			font-size: 1.125rem;
+		}
+
+		/* Custom widget styling – harmonized with page */
+		.job-link {
+			background-color: #2a9d8f !important;
+			border-radius: 0.5rem !important;
+			font-weight: 600 !important;
+			transition: background-color 0.2s !important;
+		}
+		.job-link:hover {
+			background-color: #21867a !important;
+		}
+
+		.filter-bar {
+			border-radius: 9999px !important;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+			padding: 0.5rem 1.5rem !important;
+		}
+
+		.job-item {
+			border-radius: 0.75rem !important;
+			background: white !important;
+			box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05) !important;
+			padding: 1.5rem !important;
+			transition: box-shadow 0.2s;
+		}
+		.job-item:hover {
+			box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1) !important;
+		}
+
+		/* Footer */
+		.site-footer {
+			background-color: #0f3b5e;
+			color: #e2e8f0;
+			padding: 3rem 0;
+		}
+
+		.footer-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 2rem;
+			margin-bottom: 2rem;
+		}
+
+		.footer-col h4 {
+			color: white;
+			font-size: 1.125rem;
+			margin-bottom: 1rem;
+		}
+
+		.footer-col ul {
+			list-style: none;
+		}
+
+		.footer-col li {
+			margin-bottom: 0.5rem;
+		}
+
+		.footer-col a {
+			color: #cbd5e1;
+			text-decoration: none;
+		}
+		.footer-col a:hover {
+			color: white;
+		}
+
+		.copyright {
+			border-top: 1px solid #1e4a6d;
+			padding-top: 2rem;
+			text-align: center;
+			color: #94a3b8;
+		}
+
+		/* Responsive adjustments */
+		@media (max-width: 768px) {
+			.hero .container {
+				flex-direction: column;
+				text-align: center;
+				gap: 2rem;
+			}
+			.hero-text p {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.nav-links {
+				display: none;
+			}
+			.header-content {
+				justify-content: center;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-content">
+			<div class="logo">BFO <span>•</span> Group</div>
+			<nav class="nav-links">
+				<a href="#">Home</a>
+				<a href="#">Leistungen</a>
+				<a href="#" class="active">Karriere</a>
+				<a href="#">Über uns</a>
+				<a href="#">Kontakt</a>
+			</nav>
+			<a href="#" class="btn-outline">Bewerberportal</a>
+		</div>
+	</header>
+
+	<section class="hero">
+		<div class="container">
+			<div class="hero-text">
+				<span class="hero-badge">👉 Jetzt 46 offene Stellen</span>
+				<h1>Arbeiten, wo Innovation zuhause ist</h1>
+				<p>Gestalten Sie mit uns die Zukunft – in einem dynamischen Umfeld mit flachen Hierarchien und sinnstiftenden Projekten.</p>
+				<a href="#job-client" style="background-color:#2a9d8f; color:white; padding:0.75rem 2rem; border-radius:9999px; text-decoration:none; font-weight:600; display:inline-block;">Stellen entdecken</a>
+			</div>
+			<div class="hero-image">
+				<!-- Simple illustration (inline SVG) -->
+				<svg width="400" height="320" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="200" cy="160" r="120" fill="#D9EAF5" />
+					<circle cx="230" cy="130" r="40" fill="#2a9d8f" fill-opacity="0.2" />
+					<circle cx="150" cy="200" r="30" fill="#2a9d8f" fill-opacity="0.15" />
+					<rect x="180" y="140" width="120" height="16" rx="8" fill="#2a9d8f" />
+					<rect x="180" y="170" width="100" height="16" rx="8" fill="#0f3b5e" fill-opacity="0.3" />
+					<rect x="180" y="200" width="80" height="16" rx="8" fill="#0f3b5e" fill-opacity="0.2" />
+					<path d="M80 260 L320 260 L300 300 L100 300 L80 260" fill="#0f3b5e" fill-opacity="0.1" />
+					<circle cx="120" cy="120" r="12" fill="#2a9d8f" />
+					<circle cx="280" cy="190" r="12" fill="#2a9d8f" />
+				</svg>
+			</div>
+		</div>
+	</section>
+
+	<section class="values">
+		<div class="container">
+			<h2 class="section-title">Warum wir?</h2>
+			<div class="values-grid">
+				<div class="value-card">
+					<div class="value-icon">🌍</div>
+					<h3>Flexibles Arbeiten</h3>
+					<p>Homeoffice, Hybrid oder vor Ort – du wählst, was zu dir passt.</p>
+				</div>
+				<div class="value-card">
+					<div class="value-icon">🚀</div>
+					<h3>Weiterbildung</h3>
+					<p>Individuelle Entwicklungspläne und ein grosses Kursbudget.</p>
+				</div>
+				<div class="value-card">
+					<div class="value-icon">🤝</div>
+					<h3>Teamspirit</h3>
+					<p>Regelmässige Events und eine offene Feedbackkultur.</p>
+				</div>
+				<div class="value-card">
+					<div class="value-icon">💡</div>
+					<h3>Innovation</h3>
+					<p>Arbeite an zukunftsweisenden Projekten mit modernsten Technologien.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="job-section" id="jobs">
+		<div class="container">
+			<h2 class="section-title">Offene Stellen</h2>
+			<p class="section-sub">Finde die Position, die zu deinen Fähigkeiten und Interessen passt. Nutze die Filter, um gezielt zu suchen.</p>
+
+			<!-- Thin Client Widget -->
+			<div id="job-client"
+				 data-api-url="https://api.jobs.bfo.ch"
+				 data-filter-options='["HomeOffice","Language","Workplace"]'
+				 data-show-search-bar="true"
+				 data-search-background-color="#ffffff"
+				 data-search-placeholder-color="#2a9d8f"
+				 data-use-mock="true">
+			</div>
+		</div>
+	</section>
+
+	<footer class="site-footer">
+		<div class="container">
+			<div class="footer-grid">
+				<div class="footer-col">
+					<h4>BFO Group</h4>
+					<ul>
+						<li><a href="#">Über uns</a></li>
+						<li><a href="#">Geschäftsleitung</a></li>
+						<li><a href="#">Nachhaltigkeit</a></li>
+						<li><a href="#">Presse</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Karriere</h4>
+					<ul>
+						<li><a href="#">Stellenangebote</a></li>
+						<li><a href="#">Ausbildung</a></li>
+						<li><a href="#">Praktikum</a></li>
+						<li><a href="#">Bewerbungstipps</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Leistungen</h4>
+					<ul>
+						<li><a href="#">IT & Digitalisierung</a></li>
+						<li><a href="#">Marketing & Kommunikation</a></li>
+						<li><a href="#">Finanzen & Treuhand</a></li>
+						<li><a href="#">Bau & Infrastruktur</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Kontakt</h4>
+					<ul>
+						<li>BFO Group AG</li>
+						<li>Bahnhofstrasse 42</li>
+						<li>8001 Zürich</li>
+						<li><a href="mailto:jobs@bfo.ch">jobs@bfo.ch</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="copyright">
+				© 2026 BFO Group. Alle Rechte vorbehalten.
+			</div>
+		</div>
+	</footer>
+
+	<!-- Thin Client entrypoint -->
+	<script type="module" src="../src/index.js"></script>
+</body>
+</html>

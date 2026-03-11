@@ -13,7 +13,8 @@ function logout() {
 <header v-if="route.name !== 'login' && route.name !== 'register'">
   <Header title="Job Page" icon="src/images/pfp.webp"></Header>
     <h3 @click="$router.push('/favorites')">Meine Favoriten</h3>
-    <h1>Jobpage</h1>
+    <img src="/src/images/logo-header.png" alt="Papagei-Logo" class="logo-header">    
+    <h1>ParrotJobs</h1>
     <div class="profile">
       <span>A.B.</span>
       <button @click="logout">Ausloggen</button>

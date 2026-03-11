@@ -17,6 +17,15 @@ import { createLoadingSpinner } from './components/Loading.js';
 import { createFilterBar } from './components/FilterBar.js';
 import { renderJobList } from './components/JobList.js';
 
+function normalizeConfigValue(value) {
+	if (typeof value !== 'string') {
+		return value;
+	}
+
+	const trimmedValue = value.trim();
+	return trimmedValue === '' ? undefined : trimmedValue;
+}
+
 /**
  * Job listing widget.
  *
@@ -46,7 +55,7 @@ class JobWidget {
 		 * Configuration object parsed from `data-*` attributes.
 		 * @type {Object}
 		 * @property {string} apiUrl - Base URL of the job API.
-		 * @property {string|undefined} category - Pre‑selected job category.
+		 * @property {string|string[]|undefined} category - Pre‑selected job category or categories.
 		 * @property {string|undefined} region - Pre‑selected region.
 		 * @property {string|undefined} language - Default language hint.
 		 * @property {string[]} filterOptions - Array of additional filter names.
@@ -109,8 +118,8 @@ class JobWidget {
 	parseConfig(container) {
 		const config = {
 			apiUrl: container.dataset.apiUrl || 'https://api.jobs.bfo.ch',
-			category: container.dataset.category,
-			region: container.dataset.region,
+			category: normalizeConfigValue(container.dataset.category),
+			region: normalizeConfigValue(container.dataset.region),
 			language: container.dataset.language, // Could be default language
 			filterOptions: container.dataset.filterOptions
 				? JSON.parse(container.dataset.filterOptions)
