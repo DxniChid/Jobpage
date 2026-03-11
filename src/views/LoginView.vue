@@ -24,7 +24,10 @@ function login() {
     </form>
 
   </div>
-        <h3>Kein Account? Registrieren Sie sich  <a href="#">hier</a></h3>
+<h3>
+  Kein Account? Registrieren Sie sich 
+  <router-link :to="{ name: 'register' }">hier</router-link>
+</h3>
 
 </template>
 
@@ -68,7 +71,7 @@ button {
 
 h3 {
   text-align: center;
-  width: 100%;
+  margin-left: 480px;
 }
 
 h3 a {
