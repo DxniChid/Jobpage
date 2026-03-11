@@ -1,92 +1,66 @@
 <script>
-
 import Job_Ad from '@/components/Job_Ad.vue';
+import { fetchJobs } from '../../thin-client/src/api/jobApi.js';
+
+const ApiJobs = await fetchJobs()
 
 export default {
-  components: {
-    Job_Ad
-  },
+  components: { Job_Ad },
 
-  computed: {
-      filteredJob() {
-        if (this.search_text) {
-          return this.jobs.filter(jobs => {
-            return this.search_text
-              .toLowerCase()
-              .split(' ')
-              .every(word => {
-                return jobs.title.toLowerCase().includes(word)
-                  ||
-                  jobs.company.toLowerCase().includes(word)
-                  ||
-                  jobs.city.toLowerCase().includes(word)
-                  ||
-                  jobs.zip.toLowerCase().includes(word)
-                  ||
-                  jobs.canton.toLowerCase().includes(word)
-              });
-          }
-          )
-        }
-        return this.jobs
-      }
-    },
   data() {
     return {
       search_text: '',
-      jobs: [
-        {
-          id: 1,
-          title: "Informatiker/in EFZ",
-          company: "Informatik GmbH",
-          city: "Jegenstorf",
-          zip: "3303",
-          canton: "SO",
-          favorite: false
-        },
-        {
-          id: 2,
-          title: "Informatiker/in EFZ",
-          company: "Mustermann AG",
-          city: "Luzern",
-          zip: "6000",
-          canton: "LU",
-          favorite: false
-        },
-        {
-          id: 3,
-          title: "Informatiker/in EFZ",
-          company: "Informatik AG",
-          city: "Visp",
-          zip: "3930",
-          canton: "VS",
-          favorite: true
-        }
-      ],
-      
-    }
+      jobs: ApiJobs
+    };
   },
-  methods:
-  {
-    toggleFavorite(id) {
-      const job = this.jobs.find(j => j.id === id)
-      job.favorite = !job.favorite
+
+
+
+  computed: {
+    filteredJob() {
+      if (this.search_text) {
+        return this.jobs.filter(jobs => {
+
+          // Set filter by check every word of search text
+          return this.search_text
+            .toLowerCase()
+            .split(' ')
+            .every(word => {
+              return jobs.title.toLowerCase().includes(word)
+                ||
+                jobs.company.toString().includes(word)
+                ||
+                jobs.location.toString().toLowerCase().includes(word)
+            });
+        });
+      }
+
+        return this.jobs;
+      
+
     },
-    logOut() {
-      alert("Du wurdest ausgeloggt!");
-    },
+
+    methods: {
+      toggleFavorite(id) {
+        const job = this.jobs.find(j => j.id === id);
+        if (job) job.favorite = !job.favorite;
+      },
+      logOut() {
+        alert("Du wurdest ausgeloggt!");
+      }
+    }
   }
+
 }
-
-
 </script>
 
 <template>
   <div class="search-wrap">
     <input v-model="search_text" class="search" placeholder="Bitte eingeben..." />
-    <button class="filter">⚙</button>
+    <button class="filter" @click="loadJobs">⚙</button>
+
   </div>
-  <Job_Ad :jobs="filteredJob" @toggle-favorite="toggleFavorite(jobs.id)" />
+  <Job_Ad :jobs="filteredJob" @toggle-favorite="toggleFavorite" />
 
 </template>
 

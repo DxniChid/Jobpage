@@ -51,7 +51,7 @@ const DEFAULT_API_URL = 'https://api.jobs.bfo.ch';
  * // Use custom API endpoint
  * const jobs = await fetchJobs('https://my-jobs-api.example');
  */
-export async function fetchJobs(apiUrl = DEFAULT_API_URL, useMock = false) {
+export async function fetchJobs(apiUrl = DEFAULT_API_URL, useMock = true) {
 	if (useMock) {
 		console.log('Using mock job data (testing mode)');
 		return [...mockJobs];
