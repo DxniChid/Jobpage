@@ -1,8 +1,12 @@
 
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
+const router = useRouter() 
 import './assets/style.css'
+function logout() {
+  router.push({ name: 'login' }); 
+}
 </script>
 
 <template>
