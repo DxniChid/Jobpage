@@ -29,7 +29,11 @@ function login() {
       <button type="submit">Login</button>
 
     </form>
-  </div>
+    <h3>
+      Bereits einen Account? Klicken Sie  
+      <router-link :to="{ name: 'register' }">hier</router-link>
+    </h3>  
+</div>
 
 
 </template>
