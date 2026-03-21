@@ -2,12 +2,12 @@
   <div class="page">
     <div class="container">
       <div v-for="job in jobs" :key="job.id" class="card" >
-        <div class="left" @click="$router.push('/jobdescription')">
+        <div class="left" @click="navigateToJob(job.id)">
           <div class="title">{{ job.title }}</div>
           <div class="company">{{ job.company }}</div>
         </div>
         
-        <div class="middle" @click="$router.push('/jobdescription')">
+        <div class="middle" @click="navigateToJob(job.id)">
           <div class="location">
             📍 {{ job.location }}, {{ job.plz }} | {{ job.canton }}
           </div>
@@ -26,6 +26,10 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 defineProps({
   jobs: {
     type: Array,
@@ -34,6 +38,11 @@ defineProps({
 })
 
 defineEmits(["toggle-favorite"])
+
+function navigateToJob(jobId) {
+  console.log('Navigating to job:', jobId)
+  router.push({ name: 'jobdescription', params: { id: jobId } })
+}
 </script>
 
 <style scoped>
