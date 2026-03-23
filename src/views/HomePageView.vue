@@ -189,9 +189,7 @@ export default {
     align-items: center;
 }
 
-.job-title {
-    font-weight: bold;
-}
+
 
 .job-company {
     color: #999;

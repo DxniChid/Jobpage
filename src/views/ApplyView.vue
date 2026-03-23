@@ -1,5 +1,5 @@
 <template>
-    <div @click="$router.push('/jobdescription')"><img src="@/images/back.png" id="back"></div>
+    <div @click="goBack"><img src="@/images/back.png" id="back"></div>
   <div class="center-container">
     <div class="form-container">
       <h1>Bewerbungsformular</h1>
@@ -76,10 +76,12 @@
 
 <script setup>
 import { ref } from "vue"
+import { useRouter, useRoute } from "vue-router"
 
 const fileInput = ref(null)
-
 const files = ref([])
+const router = useRouter()
+const route = useRoute()
 
 const form = ref({
   nachname: "",
@@ -100,7 +102,15 @@ function handleFiles(event) {
   const selectedFiles = Array.from(event.target.files)
   files.value.push(...selectedFiles)
 }
+
+function goBack() {
+  router.back()
+}
 </script>
+
+
+  
+
 
 <style scoped>
 

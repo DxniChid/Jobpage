@@ -29,6 +29,7 @@
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+ 
 
 defineProps({
   jobs: {
@@ -89,7 +90,7 @@ function navigateToJob(jobId) {
 
 .title {
   font-size: 18px;
-  font-weight: 600;
+ 
 }
 
 .company {

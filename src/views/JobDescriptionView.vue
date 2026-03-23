@@ -32,8 +32,13 @@ onMounted(async () => {
   }
 })
 
-function goToApply() {
-  router.push('/apply')
+function navigateToApply() {
+  const jobId = route.params.id
+  router.push({ name: 'apply', params: { id: jobId } })
+}
+
+function goBack() {
+  router.back()
 }
 </script>
 
@@ -44,7 +49,7 @@ function goToApply() {
     <button @click="$router.push('/homepage')" style="margin-left: 10px; padding: 10px 20px;">Back</button>
   </div>
   <div v-else>
-    <div @click="$router.push('/homepage')"><img src="@/images/back.png" id="back"></div>
+    <div @click="goBack"><img src="@/images/back.png" id="back"></div>
     <div id="box">
         <div id="description">
             <JobDescription 
@@ -65,12 +70,13 @@ function goToApply() {
                 :company-name="job.company" 
             />
         </div>
-        <button @click="goToApply">
+        <button @click="navigateToApply">
             <img src="@/images/clipboard.png" alt="Clipboard to Apply">
         </button>
     </div>
   </div>
 </template>
+
 
 <style scoped>
     #box{
