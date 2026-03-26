@@ -1,39 +1,36 @@
 <template>
-  
   <div class="page">
     <div class="container">
-
       <div v-for="job in jobs" :key="job.id" class="card" >
-        <div @click="$router.push('/jobdescription')">
-          <div class="left">
-            <div class="title">{{ job.title }}</div>
-            <div class="company">{{ job.company }}</div>
+        <div class="left" @click="navigateToJob(job.id)">
+          <div class="title">{{ job.title }}</div>
+          <div class="company">{{ job.company }}</div>
+        </div>
+        
+        <div class="middle" @click="navigateToJob(job.id)">
+          <div class="location">
+            📍 {{ job.location }}, {{ job.plz }} | {{ job.canton }}
           </div>
         </div>
         
-          <div class="right" @click="$router.push('/jobdescription')">
-            <div class="location">
-              📍 {{ job.city }}, {{ job.zip }} | {{ job.canton }}
-            </div>
-          </div>
-        
-          <button
-            class="heart"
-            :class="{ active: job.favorite }"
-            @click="$emit('toggle-favorite', job.id)"
-          >
-            ♥
-          </button>
-        
-
+        <button
+          class="heart"
+          :class="{ active: job.favorite }"
+          @click="$emit('toggle-favorite', job.id)"
+        >
+          ♥
+        </button>
       </div>
-
     </div>
   </div>
-  
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+ 
+
 defineProps({
   jobs: {
     type: Array,
@@ -42,6 +39,11 @@ defineProps({
 })
 
 defineEmits(["toggle-favorite"])
+
+function navigateToJob(jobId) {
+  console.log('Navigating to job:', jobId)
+  router.push({ name: 'jobdescription', params: { id: jobId } })
+}
 </script>
 
 <style scoped>
@@ -71,6 +73,7 @@ defineEmits(["toggle-favorite"])
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 
   transition: 0.15s;
 }
@@ -80,10 +83,15 @@ defineEmits(["toggle-favorite"])
   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
 }
 
+.left {
+  width:360px;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
 
 .title {
   font-size: 18px;
-  font-weight: 600;
+ 
 }
 
 .company {
@@ -92,19 +100,22 @@ defineEmits(["toggle-favorite"])
   margin-top: 6px;
 }
 
-.right {
+.middle {
+  flex: 1;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 22px;
+  cursor: pointer;
 }
 
 .location {
   font-size: 14px;
   color: #444;
-  margin-left: 250px;
+  white-space: nowrap;
 }
 
 .heart {
+  flex: 0 0 auto;
   font-size: 22px;
   border: none;
   background: none;
@@ -112,6 +123,7 @@ defineEmits(["toggle-favorite"])
   color: #6b5a8e;
   transition: 0.15s;
   z-index: 28;
+  padding: 0;
 }
 
 .heart.active {
