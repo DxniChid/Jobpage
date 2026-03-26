@@ -84,6 +84,7 @@ function navigateToJob(jobId) {
 }
 
 .left {
+  width:360px;
   flex: 0 0 auto;
   cursor: pointer;
 }
@@ -102,7 +103,7 @@ function navigateToJob(jobId) {
 .middle {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: center;
   cursor: pointer;
 }
