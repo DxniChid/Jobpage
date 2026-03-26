@@ -47,9 +47,9 @@ export default {
         <div class="filter-container">
             <div class="filters-row">
                 <div class="filter-group">
-                    <label>Canton</label>
+                    <label>Kanton</label>
                     <select :value="filters.canton" @change="updateFilter('canton', $event.target.value)" class="filter-select">
-                        <option value="">All Cantons</option>
+                        <option value="">Alle Kantone</option>
                         <option v-for="canton in cantons" :key="canton" :value="canton">
                             {{ canton }}
                         </option>
@@ -57,10 +57,10 @@ export default {
                 </div>
 
                 <div class="filter-group">
-                    <label>Category</label>
+                    <label>Kategorie</label>
                     <select :value="filters.category" @change="updateFilter('category', $event.target.value)"
                         class="filter-select">
-                        <option value="">All Categories</option>
+                        <option value="">Alle Kategorien</option>
                         <option v-for="category in categories" :key="category" :value="category">
                             {{ category }}
                         </option>
@@ -68,10 +68,10 @@ export default {
                 </div>
 
                 <div class="filter-group">
-                    <label>Workplace</label>
+                    <label>Arbeitsplatz</label>
                     <select :value="filters.workplace" @change="updateFilter('workplace', $event.target.value)"
                         class="filter-select">
-                        <option value="">All Workplace Types</option>
+                        <option value="">Alle Arbeitsplatz Typen</option>
                         <option v-for="workplace in workplaces" :key="workplace" :value="workplace">
                             {{ workplace }}
                         </option>
@@ -79,10 +79,10 @@ export default {
                 </div>
 
                 <div class="filter-group">
-                    <label>Language</label>
+                    <label>Sprache</label>
                     <select :value="filters.language" @change="updateFilter('language', $event.target.value)"
                         class="filter-select">
-                        <option value="">All Languages</option>
+                        <option value="">Alle Sprachen</option>
                         <option v-for="language in languages" :key="language" :value="language">
                             {{ language }}
                         </option>
@@ -92,7 +92,7 @@ export default {
                 <div class="filter-group checkbox">
                     <label>
                         <input type="checkbox" :checked="filters.homeOffice === true" @change="handleHomeOfficeChange" />
-                        Home Office Available
+                        Home Office Verfügbar
                     </label>
                 </div>
             </div>
