@@ -53,7 +53,9 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Hybrid',
 		url: 'https://jobs.bfo.ch/1',
-		publishedAt: '2026-02-01'
+		publishedAt: '2026-02-01',
+		contactEmail: 'recruiting@bfo.ch',
+		contactPhone: '+41 31 123 45 67'
 	},
 	{
 		id: '2',
@@ -70,7 +72,8 @@ export const mockJobs = [
 		language: 'Englisch',
 		workplace: 'Vor Ort',
 		url: 'https://jobs.bfo.ch/2',
-		publishedAt: '2026-01-28T10:30:00Z'
+		publishedAt: '2026-01-28T10:30:00Z',
+		contactEmail: 'hr@techsolutions.ch'
 	},
 	{
 		id: '3',
@@ -87,7 +90,8 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Remote',
 		url: 'https://jobs.bfo.ch/3',
-		publishedAt: '2026-02-05T09:15:00Z'
+		publishedAt: '2026-02-05T09:15:00Z',
+		contactPhone: '+41 61 234 56 78'
 	},
 	{
 		id: '4',
@@ -121,7 +125,9 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Hybrid',
 		url: 'https://jobs.bfo.ch/5',
-		publishedAt: '2026-02-03T11:00:00Z'
+		publishedAt: '2026-02-03T11:00:00Z',
+		contactEmail: 'personal@personalpro.ch',
+		contactPhone: '+41 41 345 67 89'
 	},
 	{
 		id: '6',
@@ -155,7 +161,8 @@ export const mockJobs = [
 		language: 'Englisch',
 		workplace: 'Remote',
 		url: 'https://jobs.bfo.ch/7',
-		publishedAt: '2026-02-07T08:00:00Z'
+		publishedAt: '2026-02-07T08:00:00Z',
+		contactEmail: 'jobs@cloudnative.ch'
 	},
 	{
 		id: '8',
@@ -189,7 +196,8 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Vor Ort',
 		url: 'https://jobs.bfo.ch/9',
-		publishedAt: '2026-02-04T11:15:00Z'
+		publishedAt: '2026-02-04T11:15:00Z',
+		contactPhone: '+41 41 456 78 90'
 	},
 	{
 		id: '10',
@@ -242,7 +250,9 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Vor Ort',
 		url: 'https://jobs.bfo.ch/12',
-		publishedAt: '2026-02-08T12:00:00Z'
+		publishedAt: '2026-02-08T12:00:00Z',
+		contactEmail: 'personal@spitalbern.ch',
+		contactPhone: '+41 31 567 89 01'
 	},
 	{
 		id: '13',
@@ -312,7 +322,8 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Remote',
 		url: 'https://jobs.bfo.ch/16',
-		publishedAt: '2026-02-06T14:45:00Z'
+		publishedAt: '2026-02-06T14:45:00Z',
+		contactEmail: 'jobs@sanitaerhuber.ch'
 	},
 	{
 		id: '17',
@@ -348,7 +359,8 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Vor Ort',
 		url: 'https://jobs.bfo.ch/18',
-		publishedAt: '2026-02-05T11:20:00Z'
+		publishedAt: '2026-02-05T11:20:00Z',
+		contactPhone: '+41 62 678 90 12'
 	},
 	{
 		id: '19',
@@ -401,7 +413,9 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Hybrid',
 		url: 'https://jobs.bfo.ch/21',
-		publishedAt: '2026-02-04T09:45:00Z'
+		publishedAt: '2026-02-04T09:45:00Z',
+		contactEmail: 'karriere@ubs.ch',
+		contactPhone: '+41 44 789 01 23'
 	},
 	{
 		id: '22',
@@ -454,7 +468,8 @@ export const mockJobs = [
 		language: 'Deutsch',
 		workplace: 'Vor Ort',
 		url: 'https://jobs.bfo.ch/24',
-		publishedAt: '2026-02-03T12:30:00Z'
+		publishedAt: '2026-02-03T12:30:00Z',
+		contactEmail: 'bewerbung@kronenhalle.ch'
 	},
 	{
 		id: '25',
@@ -488,7 +503,8 @@ export const mockJobs = [
 		language: 'Italienisch',
 		workplace: 'Vor Ort',
 		url: 'https://jobs.bfo.ch/26',
-		publishedAt: '2026-01-25T10:00:00Z'
+		publishedAt: '2026-01-25T10:00:00Z',
+		contactPhone: '+41 91 890 12 34'
 	},
 
 	// Education & Training

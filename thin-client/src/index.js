@@ -129,6 +129,10 @@ class JobWidget {
 			showSearchBar: container.dataset.showSearchBar !== 'false',
 			searchBackgroundColor: container.dataset.searchBackgroundColor,
 			searchPlaceholderColor: container.dataset.searchPlaceholderColor,
+			showContact: container.dataset.showContact !== 'false',
+			linkColor: container.dataset.linkColor,
+			linkTextColor: container.dataset.linkTextColor,
+			contactColor: container.dataset.contactColor,
 			// Allow forcing mock data via data-use-mock="true"
 			useMock: container.dataset.useMock === 'true',
 		};
@@ -158,6 +162,20 @@ class JobWidget {
 		// 2. Build basic DOM structure
 		this.container.innerHTML = '';
 		this.container.classList.add('job-client-widget');
+
+		// Apply CSS variables from config
+		if (this.config.linkColor) {
+			this.container.style.setProperty('--job-link-color', this.config.linkColor);
+		}
+		if (this.config.linkTextColor) {
+			this.container.style.setProperty('--job-link-text-color', this.config.linkTextColor);
+		}
+		if (this.config.contactColor) {
+			this.container.style.setProperty('--job-contact-color', this.config.contactColor);
+		}
+		if (!this.config.showContact) {
+			this.container.classList.add('hide-contact');
+		}
 
 		// 3. Add loading spinner
 		this.loadingSpinner = createLoadingSpinner();

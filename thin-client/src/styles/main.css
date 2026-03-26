@@ -262,10 +262,43 @@
 	color: #3a3a3a;
 }
 
+.job-contact {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin: 0.75rem 0;
+}
+
+.job-contact a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	color: var(--job-contact-color, #1a73b8);
+	text-decoration: none;
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.job-contact a:hover {
+	text-decoration: underline;
+}
+
+.job-contact-email::before {
+	content: "✉";
+}
+
+.job-contact-phone::before {
+	content: "☎";
+}
+
+.job-client-widget.hide-contact .job-contact {
+	display: none;
+}
+
 .job-link {
 	display: inline-block;
-	background: #d71920;
-	color: white;
+	background: var(--job-link-color, #d71920);
+	color: var(--job-link-text-color, white);
 	padding: 0.7rem 1rem;
 	text-decoration: none;
 	border-radius: 4px;
@@ -275,7 +308,7 @@
 }
 
 .job-link:hover {
-	background: #bf161c;
+	filter: brightness(0.88);
 }
 
 .no-jobs {
