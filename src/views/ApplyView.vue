@@ -7,39 +7,39 @@
       <form class="apply-form">
         <div class="form-group">
           <label>Nachname:</label>
-          <input type="text" v-model="form.nachname" />
+          <input type="text" v-model="form.nachname" required />
         </div>
 
         <div class="form-group">
           <label>Vorname:</label>
-          <input type="text" v-model="form.vorname" />
+          <input type="text" v-model="form.vorname" required />
         </div>
 
         <div class="form-group">
           <label>Adresse:</label>
-          <input type="text" v-model="form.adresse" />
+          <input type="text" v-model="form.adresse" required />
         </div>
 
         <div class="row">
           <div class="form-group half">
             <label>Ort:</label>
-            <input type="text" v-model="form.ort" />
+            <input type="text" v-model="form.ort" required />
           </div>
 
           <div class="form-group small">
             <label>PLZ:</label>
-            <input type="text" v-model="form.plz" />
+            <input type="text" v-model="form.plz" required />
           </div>
         </div>
 
         <div class="form-group">
           <label>Telefonnummer:</label>
-          <input type="text" v-model="form.telefon" />
+          <input type="text" v-model="form.telefon" required />
         </div>
 
         <div class="form-group">
           <label>Geburtsdatum:</label>
-          <input type="date" v-model="form.geburtsdatum" />
+          <input type="date" v-model="form.geburtsdatum" required />
         </div>
 
         <div class="form-group">
@@ -50,7 +50,6 @@
         <div class="form-group upload-group">
           <label>Lebenslauf u. Beilagen:</label>
 
-          <!-- versteckter File Input -->
           <input
             type="file"
             ref="fileInput"
