@@ -26,7 +26,7 @@ function login() {
       <input type="password" required placeholder="Bitte Password eingeben" />
 
       <label>Passwort wiederholen*</label>
-      <input type="Passwort" required="">
+      <input type="password" required="">
 
       <button type="submit">Registrieren</button>
     </form>
