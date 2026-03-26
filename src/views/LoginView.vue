@@ -25,10 +25,12 @@ function login() {
     </form>
   </div>
   
-<h3>
-  Kein Account? Registrieren Sie sich 
-  <router-link :to="{ name: 'register' }">hier</router-link>
-</h3>
+    <div class="login-router">
+      <p>
+        Bereits einen Account? Klicken Sie  
+        <router-link :to="{ name: 'login' }">hier</router-link>
+      </p>
+    </div> 
 
 </template>
 
@@ -82,6 +84,20 @@ h3 a {
 }
 
 h3 a:hover {
+  text-decoration: underline;
+}
+.login-router {
+  margin-top: 10px; 
+  text-align: center;
+  width: 100%;
+}
+
+.login-router a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.login-router a:hover {
   text-decoration: underline;
 }
 </style>
