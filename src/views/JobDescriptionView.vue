@@ -8,6 +8,9 @@ import JobDescription from '../components/description.vue'
 import Address from '../components/address.vue'
 import Date from '@/components/date.vue'
 
+import placeIcon from '@/images/place-marker-icon.jpg'
+import buildingIcon from '@/images/building-icon.jpg'
+
 const router = useRouter()
 const route = useRoute()
 const job = ref(null)
@@ -62,11 +65,11 @@ function goBack() {
         </div>        
         <div id="address">
             <Address 
-                location-icon="src/images/place-marker-icon.jpg" 
+                :location-icon="placeIcon" 
                 :location="job.location" 
                 :postal-code="job.plz" 
                 :canton="job.canton" 
-                building-icon="src/images/building-icon.jpg" 
+                :building-icon="buildingIcon" 
                 :company-name="job.company" 
             />
         </div>
