@@ -1,6 +1,8 @@
 <script setup>
-import { useRouter } from 'vue-router'  
+import { useRouter } from 'vue-router'
+
 const router = useRouter()
+
 function login() {
     router.push({ name: 'homepage' }) 
 }
@@ -20,10 +22,9 @@ function login() {
       <input type="password" required placeholder="Gib dein Passwort ein" />
 
       <button type="submit">Login</button>
-
     </form>
-
   </div>
+  
 <h3>
   Kein Account? Registrieren Sie sich 
   <router-link :to="{ name: 'register' }">hier</router-link>
@@ -72,6 +73,7 @@ button {
 h3 {
   text-align: center;
   margin-left: 480px;
+  font-weight: lighter;
 }
 
 h3 a {

@@ -1,6 +1,8 @@
 <script setup>
-import { useRouter } from 'vue-router'  
+import { useRouter } from 'vue-router' 
+
 const router = useRouter()
+
 function login() {
     router.push({ name: 'homepage' }) 
 }
@@ -10,30 +12,32 @@ function login() {
 <template>
   <div class="container">
     <img src="/src/images/LogoLogin.png" alt="Logo" />
-    <h2>Register</h2>
+    <h2>Registrierung</h2>
 
     <form class="login" @submit.prevent="login">
       <label>Vorname*</label>
-      <input type="text" required="">
+      <input type="text" required placeholder="Bitte Vorname eingeben">
       <label>Nachname*</label>
-      <input type="text" required="">
+      <input type="text" required placeholder="Bitte Nachname eingeben">
       <label>E-Mail*</label>
-      <input type="email" required placeholder="Gib deine E-Mail ein" />
+      <input type="email" required placeholder="Bitte E-Mail eingeben" />
 
       <label>Passwort*</label>
-      <input type="password" required placeholder="Gib dein Passwort ein" />
+      <input type="password" required placeholder="Bitte Password eingeben" />
 
       <label>Passwort wiederholen*</label>
       <input type="Passwort" required="">
 
-      <button type="submit">Login</button>
-
+      <button type="submit">Registrieren</button>
     </form>
-    <h3>
-      Bereits einen Account? Klicken Sie  
-      <router-link :to="{ name: 'register' }">hier</router-link>
-    </h3>  
-</div>
+
+    <div class="login-router">
+      <p>
+        Bereits einen Account? Klicken Sie  
+        <router-link :to="{ name: 'login' }">hier</router-link>
+      </p>
+    </div> 
+  </div>
 
 
 </template>
@@ -87,6 +91,20 @@ h3 a {
 }
 
 h3 a:hover {
+  text-decoration: underline;
+}
+.login-router {
+  margin-top: 10px; 
+  text-align: center;
+  width: 100%;
+}
+
+.login-router a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.login-router a:hover {
   text-decoration: underline;
 }
 </style>

@@ -16,7 +16,6 @@ function logout() {
     <img src="/src/images/logo-header.png" alt="Papagei-Logo" @click="$router.push('/homepage')" class="logo-header">
     <h1>ParrotJobs</h1>
     <div class="profile">
-      <span>A.B.</span>
       <button @click="logout">Ausloggen</button>
     </div>
   </header>
