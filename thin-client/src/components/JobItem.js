@@ -88,6 +88,11 @@ export function createJobItem(job) {
 			<span class="job-category">${escapeHTML(job.category || '')}</span>
 			${job.homeOffice ? '<span class="badge">Home Office</span>' : ''}
 		</div>
+		${job.contactEmail || job.contactPhone ? `
+		<div class="job-contact">
+			${job.contactEmail ? `<a href="mailto:${escapeHTML(job.contactEmail)}" class="job-contact-email">${escapeHTML(job.contactEmail)}</a>` : ''}
+			${job.contactPhone ? `<a href="tel:${escapeHTML(job.contactPhone)}" class="job-contact-phone">${escapeHTML(job.contactPhone)}</a>` : ''}
+		</div>` : ''}
 		<a href="${escapeHTML(job.url || '#')}" class="job-link" target="_blank">Vollständiges Inserat</a>
 	`;
 	return article;
