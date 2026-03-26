@@ -1,0 +1,365 @@
+/* src/styles/main.css */
+.job-client-widget {
+	font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 1.25rem;
+	background: #f2f2f2;
+}
+
+.job-client-filterbar {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	gap: 1.1rem;
+	margin-bottom: 1.5rem;
+	padding: 0;
+	background: transparent;
+	border-radius: 0;
+}
+
+.filter-group {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.filter-group label {
+	font-size: 0.875rem;
+	margin-bottom: 0.45rem;
+	color: #2d2d2d;
+	font-weight: 600;
+}
+
+.filter-group select {
+	padding: 0.8rem 0.95rem;
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	background: #ececec;
+	color: #1f1f1f;
+	font-size: 1rem;
+}
+
+.filter-group input {
+	padding: 0.8rem 0.95rem;
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	background: #ececec;
+	color: #1f1f1f;
+	font-size: 1rem;
+}
+
+.multi-select {
+	position: relative;
+}
+
+.multi-select summary {
+	list-style: none;
+	padding: 0.8rem 0.95rem;
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	background: #ececec;
+	cursor: pointer;
+	height: 17px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: #1f1f1f;
+	font-size: 1rem;
+}
+
+.multi-select summary::after {
+	content: "v";
+	font-size: 0.85rem;
+	color: #2f2f2f;
+}
+
+.multi-select summary::-webkit-details-marker {
+	display: none;
+}
+
+.multi-select[open] summary {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.multi-select-options {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 0.75rem;
+	background: #fff;
+	border: 1px solid #cfcfcf;
+	border-top: 0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+	max-height: 260px;
+	overflow-y: auto;
+}
+
+.multi-select-option {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.95rem;
+	color: #333;
+}
+
+.multi-select-option input {
+	margin: 0;
+	padding: 0;
+}
+
+.filter-group-search {
+	min-width: 0;
+}
+
+.filter-group-search input {
+	background-color: var(--job-search-bg, #fff);
+}
+
+.filter-group-search input::placeholder {
+	color: var(--job-search-placeholder-color, #757575);
+	opacity: 1;
+}
+
+.active-filter-row {
+	grid-column: 1 / -1;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.8rem;
+}
+
+.active-filter-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.65rem 0.85rem;
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	background: #f4f4f4;
+	color: #222;
+	font: inherit;
+	cursor: pointer;
+}
+
+.active-filter-chip-label {
+	font-weight: 700;
+}
+
+.active-filter-chip-value {
+	color: #6a6a6a;
+}
+
+.active-filter-chip-remove {
+	font-size: 1rem;
+	line-height: 1;
+}
+
+.active-filter-chip-clear {
+	background: #f0f0f0;
+}
+
+.job-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1.2rem;
+}
+
+.job-item {
+	border: 1px solid #d7d7d7;
+	border-radius: 6px;
+	padding: 1.25rem;
+	background: #fafafa;
+	transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.job-item:hover {
+	box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+	transform: translateY(-1px);
+}
+
+.job-title {
+	margin: 0 0 0.35rem 0;
+	font-size: 1.35rem;
+	color: #202020;
+	line-height: 1.2;
+}
+
+.job-company {
+	font-weight: 700;
+	color: #d71920;
+	margin-bottom: 0.55rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	font-size: 0.8rem;
+}
+
+.job-location {
+	color: #666;
+	font-size: 0.95rem;
+	margin-bottom: 0.75rem;
+}
+
+.job-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 1rem 0 0.85rem;
+}
+
+.job-meta span {
+	background: #efefef;
+	padding: 0.38rem 0.65rem;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	color: #333;
+	border: 1px solid #d3d3d3;
+}
+
+.badge {
+	background: #edf7ec !important;
+	color: #2d7d32 !important;
+	border-color: #cfe4cd !important;
+}
+
+.job-description {
+	color: #555;
+	line-height: 1.5;
+	font-size: 0.9rem;
+	margin-bottom: 1rem;
+}
+
+.job-header {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.job-date {
+	color: #7a7a7a;
+	font-size: 0.82rem;
+	font-weight: 600;
+}
+
+.job-details h4 {
+	margin: 0.9rem 0 0.35rem;
+	font-size: 0.82rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #666;
+}
+
+.job-details p {
+	margin: 0;
+	color: #3a3a3a;
+}
+
+.job-contact {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin: 0.75rem 0;
+}
+
+.job-contact a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	color: var(--job-contact-color, #1a73b8);
+	text-decoration: none;
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.job-contact a:hover {
+	text-decoration: underline;
+}
+
+.job-contact-email::before {
+	content: "✉";
+}
+
+.job-contact-phone::before {
+	content: "☎";
+}
+
+.job-client-widget.hide-contact .job-contact {
+	display: none;
+}
+
+.job-link {
+	display: inline-block;
+	background: var(--job-link-color, #d71920);
+	color: var(--job-link-text-color, white);
+	padding: 0.7rem 1rem;
+	text-decoration: none;
+	border-radius: 4px;
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+.job-link:hover {
+	filter: brightness(0.88);
+}
+
+.no-jobs {
+	grid-column: 1 / -1;
+	text-align: center;
+	color: #999;
+	font-style: italic;
+}
+
+.error {
+	color: #e74c3c;
+	background: #fadbd8;
+	padding: 1rem;
+	border-radius: 4px;
+	border-left: 4px solid #c0392b;
+}
+
+.job-client-loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 2rem;
+}
+
+.spinner {
+	border: 3px solid #f3f3f3;
+	border-top: 3px solid #3498db;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 720px) {
+	.job-client-widget {
+		padding: 1rem;
+	}
+
+	.job-client-filterbar {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 1240px) and (min-width: 721px) {
+	.job-client-filterbar {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}

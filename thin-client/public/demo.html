@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Job Thin Client Demo</title>
+	<!-- Basic styles (can be overridden) -->
+	<link rel="stylesheet" href="../src/styles/main.css">
+</head>
+<body>
+	<header>
+		<h1>Unsere offenen Stellen</h1>
+	</header>
+
+	<!-- Placeholder with configuration -->
+	<div id="job-client"
+			data-api-url="http://localhost:8080/api/public"
+			data-category=""
+			data-region=""
+			data-language="CH-de"
+			data-filter-options='["HomeOffice", "Language", "Workplace"]'
+			data-show-search-bar="true"
+			data-search-background-color="#f0f6ff"
+			data-search-placeholder-color="#4e6f91"
+			data-style-entry="../src/styles/main.css"
+			data-show-contact="true"
+			data-link-color="#2394a6"
+			data-link-text-color="#ffffff"
+			data-contact-color="#2394a6"
+			data-use-mock="false">
+	</div>
+
+	<style>
+		/* Css of the widget can be overridden */
+		.job-link {
+			background-color: rgb(35, 148, 166);
+		}
+	</style>
+
+	<!-- Entrypoint of the Thin Client code -->
+	<script type="module" src="../src/index.js"></script>
+	<!-- Note: In the production, the bundled file is used -->
+</body>
+</html>
