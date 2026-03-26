@@ -2,8 +2,8 @@
 import { useRouter, useRoute } from 'vue-router'
 import { ref, onMounted } from 'vue'
 import { fetchJobs } from '../../thin-client/src/api/jobApi.js'
-
 import '@/assets/style.css'
+
 import JobDescription from '../components/description.vue'
 import Address from '../components/address.vue'
 import Date from '@/components/date.vue'
@@ -46,11 +46,14 @@ function goBack() {
 </script>
 
 <template> 
-  <div v-if="loading" style="padding: 20px;">Loading...</div>
+
+  <div v-if="loading" style="padding: 20px;">Bitte warten...</div>
+  
   <div v-else-if="!job" style="padding: 20px; color: red; font-weight: bold;">
-    Job not found - click back and try again
+    Job nicht gefunden - nochmals probieren
     <button @click="$router.push('/homepage')" style="margin-left: 10px; padding: 10px 20px;">Back</button>
   </div>
+
   <div v-else>
     <div @click="goBack"><img src="@/images/back.png" id="back"></div>
     <div id="box">
