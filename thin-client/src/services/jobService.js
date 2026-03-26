@@ -26,7 +26,6 @@
  *	 homeOffice: true
  * });
  */
-// src/services/jobService.js
 export function filterJobs(jobs, filters) {
 	return jobs.filter(job => {
 		if (filters.searchTerm) {
@@ -65,6 +64,19 @@ export function filterJobs(jobs, filters) {
 	});
 }
 
+/**
+ * Checks if a job value matches a filter value.
+ *
+ * If the filter value is undefined, it always matches.
+ * If the filter value is an array, it matches if the job value is
+ * included in the array. If the array is empty, it always matches.
+ * If the filter value is not an array, it matches if the job value is equal
+ * to the filter value.
+ *
+ * @param {*} jobValue - The job value to match.
+ * @param {*} filterValue - The filter value to match against.
+ * @returns {boolean} true if the job value matches the filter value, false otherwise.
+ */
 function matchesFilterValue(jobValue, filterValue) {
 	if (filterValue === undefined) {
 		return true;

@@ -31,6 +31,8 @@
  * @property {string} workplace - Workplace type ("Remote", "Hybrid", "Vor Ort").
  * @property {string} url - Link to the full job posting.
  * @property {string} publishedAt - ISO 8601 publication date.
+ * @property {string} contactEmail - Recruiting contact email.
+ * @property {string} contactPhone - Recruiting contact phone number.
  *
  * @example
  * import { mockJobs } from './mockJobs.js';
