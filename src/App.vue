@@ -23,10 +23,19 @@ function logout() {
   <main> 
   <RouterView></RouterView>
   </main>
-    <footer v-if="route.name !== 'login' && route.name !== 'register'">
-      <h4>079 90 00 00</h4>
-      <h4>test@gmail.com</h4>
-    </footer>
+<footer v-if="route.name !== 'login' && route.name !== 'register'">
+  <div class="footer-content">
+
+    <div class="impressum">
+      <p>
+        ParrotJobs GmbH | 3930 Visp | Schweiz<br>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 ParrotJobs GmbH. Alle Rechte vorbehalten.
+  </div>
+</footer>
  </div>
 </template>
 
