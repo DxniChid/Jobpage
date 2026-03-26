@@ -72,6 +72,7 @@ button {
 h3 {
   text-align: center;
   margin-left: 480px;
+  font-weight: lighter;
 }
 
 h3 a {
