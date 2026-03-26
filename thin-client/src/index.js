@@ -17,6 +17,12 @@ import { createLoadingSpinner } from './components/Loading.js';
 import { createFilterBar } from './components/FilterBar.js';
 import { renderJobList } from './components/JobList.js';
 
+/**
+ * Normalizes a configuration value by trimming it and returning undefined if the result is an empty string.
+ * If the value is not a string, it is returned as is.
+ * @param {*} value - The value to normalize.
+ * @returns {*} The normalized value.
+ */
 function normalizeConfigValue(value) {
 	if (typeof value !== 'string') {
 		return value;

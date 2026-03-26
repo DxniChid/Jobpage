@@ -59,6 +59,22 @@ function getCurrentFilters(filterBar) {
 	return filters;
 }
 
+/**
+ * Normalizes a configured value by trimming it, splitting it into an array
+ * using comma separators, and filtering out empty strings.
+ *
+ * If the value is an array, it will be mapped over to trim each entry and
+ * filter out empty strings.
+ *
+ * If the value is a string starting with '[[', it will be attempted to be
+ * parsed as JSON. If successful, the parsed array will be mapped over to
+ * trim each entry and filter out empty strings. If not successful, it will
+ * fall back to splitting the string using comma separators.
+ *
+ * @param {string|string[]|undefined} value - The value to normalize.
+ * @returns {string[]}
+ *	 The normalized array of values.
+ */
 function normalizeConfiguredValues(value) {
 	if (Array.isArray(value)) {
 		return value.map((entry) => String(entry).trim()).filter(Boolean);
@@ -87,6 +103,17 @@ function normalizeConfiguredValues(value) {
 	return trimmedValue.split(',').map((entry) => entry.trim()).filter(Boolean);
 }
 
+/**
+ * Normalizes a filter value by trimming it and converting it to a boolean
+ * if the filter name is 'homeOffice'.
+ *
+ * If the value is not a string, it will be returned as is.
+ * If the trimmed value is empty, it will be returned as undefined.
+ *
+ * @param {string} name - The filter name.
+ * @param {string|*} value - The value to normalize.
+ * @returns {string|boolean|undefined} The normalized value.
+ */
 function normalizeFilterValue(name, value) {
 	if (typeof value !== 'string') {
 		return value;
@@ -104,6 +131,15 @@ function normalizeFilterValue(name, value) {
 	return trimmedValue;
 }
 
+/**
+ * Returns a human-readable representation of a filter value.
+ *
+ * If the filter name is 'homeOffice', it will return 'Ja' if the value is true and 'Nein' if it is false.
+ * For all other filter names, it will return the string representation of the value.
+ * @param {string} name - The filter name.
+ * @param {*} value - The value to display.
+ * @returns {string} The human-readable representation of the value.
+ */
 function getDisplayValue(name, value) {
 	if (name === 'homeOffice') {
 		return value === true ? 'Ja' : 'Nein';
@@ -112,6 +148,16 @@ function getDisplayValue(name, value) {
 	return String(value);
 }
 
+/**
+ * Returns a human-readable summary of a filter group.
+ *
+ * If no values are selected, it will return 'Alle'.
+ * If only one value is selected, it will return the human-readable representation of that value.
+ * If multiple values are selected, it will return '{count} {label}' where {count} is the number of selected values and {label} is the human-readable label of the filter group.
+ * @param {string} name - The filter name.
+ * @param {Array<*>} selectedValues - The values of the filter group.
+ * @returns {string} The human-readable summary of the filter group.
+ */
 function getSummaryText(name, selectedValues) {
 	if (!selectedValues || selectedValues.length === 0) {
 		return 'Alle';
@@ -139,12 +185,23 @@ function updateGroupSummary(group) {
 	summaryLabel.textContent = getSummaryText(name, selectedValues);
 }
 
+/**
+ * Updates the human-readable summaries of all filter groups in the filter bar.
+ *
+ * @param {HTMLElement} filterBar - The DOM element of the filter bar.
+ */
 function updateAllGroupSummaries(filterBar) {
 	filterBar.querySelectorAll('[data-filter-group]').forEach((group) => {
 		updateGroupSummary(group);
 	});
 }
 
+/**
+ * Clears all selected values of a filter group.
+ *
+ * @param {HTMLElement} filterBar - The DOM element of the filter bar.
+ * @param {string} filterName - The name of the filter group to clear.
+ */
 function clearFilterGroup(filterBar, filterName) {
 	const group = filterBar.querySelector(`[data-filter-group="${filterName}"]`);
 	if (!group) {
@@ -157,6 +214,14 @@ function clearFilterGroup(filterBar, filterName) {
 	updateGroupSummary(group);
 }
 
+/**
+ * Closes all dropdowns in the filter bar, except for the one specified as
+ * `exceptGroup`. This is useful when a user selects a filter value and
+ * we want to close all other dropdowns to prevent the user from accidentally
+ * changing other filters.
+ * @param {HTMLElement} filterBar - The DOM element of the filter bar.
+ * @param {HTMLElement|null} exceptGroup - The group to exclude from being closed.
+ */
 function closeAllDropdowns(filterBar, exceptGroup = null) {
 	filterBar.querySelectorAll('[data-filter-group]').forEach((group) => {
 		if (group !== exceptGroup) {
@@ -165,6 +230,17 @@ function closeAllDropdowns(filterBar, exceptGroup = null) {
 	});
 }
 
+/**
+ * Renders active filter chips in the filter bar.
+ * If no filters are active, it will hide the active filter chip container.
+ * If filters are active, it will create a button for each active filter with a label
+ * indicating the filter name and a value indicating the selected filter value(s).
+ * Each button also has an "x" icon to remove the filter.
+ * Additionally, it will create a "clear all filters" button that will clear all active filters
+ * and reset the filter bar to its initial state.
+ * @param {HTMLElement} filterBar - The DOM element of the filter bar.
+ * @param {function} onFilterChange - Callback invoked whenever a filter value changes.
+ */
 function renderActiveFilterChips(filterBar, onFilterChange) {
 	const chipRow = filterBar.querySelector('[data-active-filters]');
 	if (!chipRow) {
@@ -248,10 +324,24 @@ function renderActiveFilterChips(filterBar, onFilterChange) {
 	chipRow.appendChild(clearButton);
 }
 
+/**
+ * Returns whether the search bar should be rendered based on the configuration.
+ *
+ * @private
+ * @param {Object} config - The widget configuration.
+ * @returns {boolean} Whether the search bar should be rendered.
+ */
 function shouldRenderSearchBar(config) {
 	return config.showSearchBar !== false;
 }
 
+/**
+ * Creates a multi-select filter group with a given name, options and selected values.
+ * @param {string} filterName - The name of the filter group.
+ * @param {Array<{value: string, label: string}>} options - The options of the filter group.
+ * @param {Array<string>} selectedValues - The selected values of the filter group.
+ * @returns {HTMLElement} The created multi-select filter group element.
+ */
 function createMultiSelectGroup(filterName, options, selectedValues = []) {
 	const wrapper = document.createElement('div');
 	wrapper.className = 'filter-group';
